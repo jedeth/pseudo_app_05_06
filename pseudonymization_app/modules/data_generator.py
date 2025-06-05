@@ -293,43 +293,55 @@ class TrainingDataGenerator:
         return training_data, generation_stats
     
     def save_training_data(self, training_data: List[Tuple[str, Dict]], 
-                          filename: str = None) -> str:
-        """
-        Sauvegarde les données d'entraînement au format JSON
+                      filename: str = None) -> str:
+    # """
+    # Sauvegarde les données d'entraînement au format JSON
+    
+    # Args:
+    #     training_data: Données d'entraînement générées
+    #     filename: Nom du fichier (généré automatiquement si None)
         
-        Args:
-            training_data: Données d'entraînement générées
-            filename: Nom du fichier (généré automatiquement si None)
-            
-        Returns:
-            str: Chemin du fichier sauvegardé
-        """
+    # Returns:
+    #     str: Chemin du fichier sauvegardé
+    # """
         if filename is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"training_data_{timestamp}.json"
-        
-        # Crée le dossier data s'il n'existe pas
+    
+    # Crée le dossier data s'il n'existe pas
         data_dir = Path("data")
         data_dir.mkdir(exist_ok=True)
-        
+    
         filepath = data_dir / filename
-        
+    
         try:
-            # Convertit les données au format JSON
+        # Convertit les données au format JSON standard
             json_data = []
-            for sentence, annotations in training_data:
+            for text, annotations in training_data:
+                # Vérifie le format des données
+                if not isinstance(text, str):
+                    print(f"⚠️ Texte invalide ignoré: {type(text)}")
+                    continue
+                
+                if not isinstance(annotations, dict) or 'entities' not in annotations:
+                    print(f"⚠️ Annotations invalides ignorées: {annotations}")
+                    continue
+            
                 json_data.append({
-                    "text": sentence,
+                    "text": text,
                     "entities": annotations["entities"]
                 })
-            
-            # Sauvegarde
+        
+            if not json_data:
+                raise ValueError("Aucune donnée valide à sauvegarder")
+        
+            # Sauvegarde au format JSON standard
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(json_data, f, indent=2, ensure_ascii=False)
-            
-            print(f"💾 Données d'entraînement sauvegardées dans: {filepath}")
+        
+            print(f"💾 {len(json_data)} exemples sauvegardés dans: {filepath}")
             return str(filepath)
-            
+        
         except Exception as e:
             raise Exception(f"Erreur lors de la sauvegarde: {e}")
     
