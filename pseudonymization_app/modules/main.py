@@ -1,3 +1,5 @@
+# Fichier : mainv2.py
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -9,7 +11,7 @@ Cette application permet de :
 2. Générer automatiquement des données d'entraînement
 3. Pseudonymiser et dépseudonymiser des textes
 
-Auteur: Assistant IA
+Auteur: Assistant IA & Vous!
 Date: 2024
 """
 
@@ -36,6 +38,9 @@ except ImportError as e:
     print("Assurez-vous que tous les modules sont présents dans le dossier 'modules'")
     sys.exit(1)
 
+# ==============================================================================
+# REMPLACEZ VOTRE CLASSE EXISTANTE PAR CELLE-CI
+# ==============================================================================
 class PseudonymizationApp:
     """
     Application principale de pseudonymisation
@@ -48,9 +53,6 @@ class PseudonymizationApp:
     def __init__(self, root):
         """
         Initialise l'application principale
-        
-        Args:
-            root: Fenêtre principale Tkinter
         """
         self.root = root
         self.root.title("Application de Pseudonymisation - SpaCy NER")
@@ -58,98 +60,62 @@ class PseudonymizationApp:
         
         # Variables de l'application
         self.selected_base_model = tk.StringVar(value="fr_core_news_sm")
-        self.custom_entities = []  # Liste des entités personnalisées
+        self.custom_entities = []
         self.training_data_path = ""
         self.trained_model_path = ""
-        
-        # Variables pour la génération de données
-        self.entity_files = {}  # Dictionnaire {type_entité: chemin_fichier}
+        self.entity_files = {}
         self.generated_training_data = None
-        
-        # Variables pour la pseudonymisation
         self.pseudonymizer = None
         self.correspondence_file_path = ""
+        self.training_in_progress = False
         
         # Initialisation des modules
         self.data_generator = TrainingDataGenerator()
         self.model_trainer = None
         self.utils = AppUtils()
         
-        # Configuration de l'interface
         self.setup_ui()
-        
-        # Création des dossiers nécessaires
         self.create_directories()
         
     def create_directories(self):
-        """
-        Crée les dossiers nécessaires à l'application s'ils n'existent pas
-        """
+        """ Crée les dossiers nécessaires à l'application. """
         directories = ['models', 'data', 'config']
         for directory in directories:
             Path(directory).mkdir(exist_ok=True)
             
     def setup_ui(self):
-        """
-        Configure l'interface utilisateur avec tous les onglets
-        
-        Cette méthode crée l'interface complète avec :
-        - Onglet de configuration
-        - Onglet de génération de données
-        - Onglet d'entraînement
-        - Onglet de pseudonymisation
-        - Onglet de dépseudonymisation
-        """
-        # Création du notebook (onglets)
+        """ Configure l'interface utilisateur avec tous les onglets. """
         self.notebook = ttk.Notebook(self.root)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        # Création des onglets
         self.create_config_tab()
         self.create_data_generation_tab()
         self.create_training_tab()
         self.create_pseudonymization_tab()
         self.create_depseudonymization_tab()
         
-        # Barre de statut
         self.status_bar = tk.Label(self.root, text="Prêt", relief=tk.SUNKEN, anchor=tk.W)
         self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
         
     def create_config_tab(self):
-        """
-        Crée l'onglet de configuration du modèle de base
-        
-        Cet onglet permet à l'utilisateur de :
-        - Sélectionner un modèle SpaCy de base
-        - Définir de nouvelles entités NER personnalisées
-        - Valider sa configuration
-        """
+        """ Crée l'onglet de configuration. """
         config_frame = ttk.Frame(self.notebook)
         self.notebook.add(config_frame, text="1. Configuration")
         
-        # Titre de la section
-        title_label = tk.Label(config_frame, text="Configuration du Modèle de Base", 
-                              font=("Arial", 16, "bold"))
+        title_label = tk.Label(config_frame, text="Configuration du Modèle de Base", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        # Section sélection du modèle
         model_frame = ttk.LabelFrame(config_frame, text="Modèle SpaCy de Base")
         model_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        # Liste des modèles disponibles
-        models = ["fr_core_news_sm", "fr_core_news_md", "fr_core_news_lg", 
-                 "en_core_web_sm", "en_core_web_md", "en_core_web_lg"]
-        
+        models = ["fr_core_news_sm", "fr_core_news_md", "fr_core_news_lg", "en_core_web_sm", "en_core_web_md", "en_core_web_lg"]
         for model in models:
-            rb = tk.Radiobutton(model_frame, text=model, variable=self.selected_base_model,
-                               value=model, font=("Arial", 10))
+            rb = tk.Radiobutton(model_frame, text=model, variable=self.selected_base_model, value=model, font=("Arial", 10))
             rb.pack(anchor=tk.W, padx=10, pady=2)
         
-        # Section entités personnalisées
         entities_frame = ttk.LabelFrame(config_frame, text="Entités NER Personnalisées")
         entities_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Zone de saisie pour nouvelle entité
         add_entity_frame = tk.Frame(entities_frame)
         add_entity_frame.pack(fill=tk.X, padx=10, pady=5)
         
@@ -157,87 +123,52 @@ class PseudonymizationApp:
         self.entity_entry = tk.Entry(add_entity_frame, width=30)
         self.entity_entry.pack(side=tk.LEFT, padx=5)
         
-        add_button = tk.Button(add_entity_frame, text="Ajouter Entité",
-                              command=self.add_custom_entity, bg="#4CAF50", fg="white")
+        add_button = tk.Button(add_entity_frame, text="Ajouter Entité", command=self.add_custom_entity, bg="#4CAF50", fg="white")
         add_button.pack(side=tk.LEFT, padx=5)
         
-        # Liste des entités ajoutées
         self.entities_listbox = tk.Listbox(entities_frame, height=8)
         self.entities_listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        # Bouton de suppression
-        remove_button = tk.Button(entities_frame, text="Supprimer Entité Sélectionnée",
-                                 command=self.remove_custom_entity, bg="#f44336", fg="white")
+        remove_button = tk.Button(entities_frame, text="Supprimer Entité Sélectionnée", command=self.remove_custom_entity, bg="#f44336", fg="white")
         remove_button.pack(pady=5)
         
-        # Bouton de validation
-        validate_button = tk.Button(config_frame, text="Valider Configuration",
-                                   command=self.validate_configuration, 
-                                   bg="#2196F3", fg="white", font=("Arial", 12))
+        validate_button = tk.Button(config_frame, text="Valider Configuration", command=self.validate_configuration, bg="#2196F3", fg="white", font=("Arial", 12))
         validate_button.pack(pady=20)
         
     def create_data_generation_tab(self):
-        """
-        Crée l'onglet de génération automatique des données d'entraînement
-        
-        Permet à l'utilisateur de :
-        - Importer des listes de termes pour chaque entité
-        - Configurer la génération de phrases
-        - Prévisualiser les données générées
-        - Exporter les données d'entraînement
-        """
+        """ Crée l'onglet de génération de données. """
         data_gen_frame = ttk.Frame(self.notebook)
         self.notebook.add(data_gen_frame, text="2. Génération de Données")
         
-        # Titre
-        title_label = tk.Label(data_gen_frame, text="Génération Automatique des Données d'Entraînement", 
-                              font=("Arial", 16, "bold"))
+        title_label = tk.Label(data_gen_frame, text="Génération Automatique des Données d'Entraînement", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        # Section import des fichiers
         import_frame = ttk.LabelFrame(data_gen_frame, text="Import des Listes de Termes")
         import_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        # Instructions
-        instructions = tk.Label(import_frame, 
-                               text="Importez un fichier texte (.txt) contenant une liste de termes par ligne pour chaque entité NER",
-                               wraplength=800, justify=tk.LEFT)
+        instructions = tk.Label(import_frame, text="Importez un fichier texte (.txt) pour chaque entité, avec un terme par ligne.", wraplength=800, justify=tk.LEFT)
         instructions.pack(padx=10, pady=5)
         
-        # Zone d'import des fichiers
-        self.files_frame = tk.Frame(import_frame)
-        self.files_frame.pack(fill=tk.X, padx=10, pady=10)
-        
-        # Bouton d'ajout de fichier
-        add_file_button = tk.Button(self.files_frame, text="Ajouter Fichier de Termes",
-                                   command=self.add_terms_file, bg="#4CAF50", fg="white")
+        add_file_button = tk.Button(import_frame, text="Ajouter Fichier de Termes", command=self.add_terms_file, bg="#4CAF50", fg="white")
         add_file_button.pack(pady=5)
         
-        # Liste des fichiers importés
         self.imported_files_list = tk.Listbox(import_frame, height=5)
         self.imported_files_list.pack(fill=tk.X, padx=10, pady=5)
         
-        # Paramètres de génération
         params_frame = ttk.LabelFrame(data_gen_frame, text="Paramètres de Génération")
         params_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        # Nombre de phrases par entité
         sentences_frame = tk.Frame(params_frame)
         sentences_frame.pack(fill=tk.X, padx=10, pady=5)
         
         tk.Label(sentences_frame, text="Nombre de phrases par terme:").pack(side=tk.LEFT)
         self.sentences_per_term = tk.IntVar(value=5)
-        sentences_spinbox = tk.Spinbox(sentences_frame, from_=1, to=50, 
-                                      textvariable=self.sentences_per_term, width=10)
+        sentences_spinbox = tk.Spinbox(sentences_frame, from_=1, to=50, textvariable=self.sentences_per_term, width=10)
         sentences_spinbox.pack(side=tk.LEFT, padx=5)
         
-        # Bouton de génération
-        generate_button = tk.Button(data_gen_frame, text="Générer Données d'Entraînement",
-                                   command=self.generate_training_data,
-                                   bg="#FF9800", fg="white", font=("Arial", 12))
+        generate_button = tk.Button(data_gen_frame, text="Générer Données d'Entraînement", command=self.generate_training_data, bg="#FF9800", fg="white", font=("Arial", 12))
         generate_button.pack(pady=20)
         
-        # Zone de prévisualisation
         preview_frame = ttk.LabelFrame(data_gen_frame, text="Aperçu des Données Générées")
         preview_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
@@ -245,217 +176,153 @@ class PseudonymizationApp:
         self.preview_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
     def create_training_tab(self):
-        """
-        Crée l'onglet d'entraînement du modèle
-        
-        Interface pour :
-        - Charger les données d'entraînement
-        - Configurer les paramètres d'entraînement
-        - Suivre le progrès en temps réel
-        - Visualiser les métriques
-        """
+        """ Crée l'onglet d'entraînement. (Version nettoyée) """
         training_frame = ttk.Frame(self.notebook)
         self.notebook.add(training_frame, text="3. Entraînement")
         
-        # Titre
-        title_label = tk.Label(training_frame, text="Fine-tuning du Modèle SpaCy", 
-                              font=("Arial", 16, "bold"))
+        title_label = tk.Label(training_frame, text="Fine-tuning du Modèle SpaCy", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        # Section chargement des données
         data_frame = ttk.LabelFrame(training_frame, text="Données d'Entraînement")
         data_frame.pack(fill=tk.X, padx=20, pady=10)
         
         data_buttons_frame = tk.Frame(data_frame)
         data_buttons_frame.pack(pady=10)
         
-        load_data_button = tk.Button(data_buttons_frame, text="Charger Données d'Entraînement",
-                                    command=self.load_training_data, bg="#4CAF50", fg="white")
+        load_data_button = tk.Button(data_buttons_frame, text="Charger Données", command=self.load_training_data, bg="#4CAF50", fg="white")
         load_data_button.pack(side=tk.LEFT, padx=5)
         
-        test_model_button = tk.Button(data_buttons_frame, text="Tester Modèle",
-                                     command=self.test_trained_model, bg="#2196F3", fg="white")
+        test_model_button = tk.Button(data_buttons_frame, text="Tester Modèle", command=self.test_trained_model, bg="#607D8B", fg="white")
         test_model_button.pack(side=tk.LEFT, padx=5)
         
         self.data_status_label = tk.Label(data_frame, text="Aucune donnée chargée", fg="red")
         self.data_status_label.pack()
         
-        # Paramètres d'entraînement
         params_frame = ttk.LabelFrame(training_frame, text="Paramètres d'Entraînement")
         params_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        # Nombre d'époques
         epochs_frame = tk.Frame(params_frame)
         epochs_frame.pack(fill=tk.X, padx=10, pady=5)
-        
         tk.Label(epochs_frame, text="Nombre d'époques:").pack(side=tk.LEFT)
         self.epochs_var = tk.IntVar(value=30)
-        epochs_spinbox = tk.Spinbox(epochs_frame, from_=5, to=200, 
-                                   textvariable=self.epochs_var, width=10)
-        epochs_spinbox.pack(side=tk.LEFT, padx=5)
+        self.epochs_spinbox = tk.Spinbox(epochs_frame, from_=5, to=200, textvariable=self.epochs_var, width=10)
+        self.epochs_spinbox.pack(side=tk.LEFT, padx=5)
         
-        # Taille de batch
         batch_frame = tk.Frame(params_frame)
         batch_frame.pack(fill=tk.X, padx=10, pady=5)
-        
         tk.Label(batch_frame, text="Taille de batch:").pack(side=tk.LEFT)
         self.batch_size_var = tk.IntVar(value=8)
-        batch_spinbox = tk.Spinbox(batch_frame, from_=1, to=32, 
-                                  textvariable=self.batch_size_var, width=10)
-        batch_spinbox.pack(side=tk.LEFT, padx=5)
+        self.batch_spinbox = tk.Spinbox(batch_frame, from_=1, to=32, textvariable=self.batch_size_var, width=10)
+        self.batch_spinbox.pack(side=tk.LEFT, padx=5)
         
-        # Bouton d'entraînement
-        train_button = tk.Button(training_frame, text="Commencer l'Entraînement",
-                                command=self.start_training,
-                                bg="#2196F3", fg="white", font=("Arial", 12))
-        train_button.pack(pady=20)
+        self.train_button = tk.Button(training_frame, text="Commencer l'Entraînement", command=self.start_training, bg="#2196F3", fg="white", font=("Arial", 12, "bold"))
+        self.train_button.pack(pady=20)
         
-        # Barre de progression
         self.progress_var = tk.DoubleVar()
-        self.progress_bar = ttk.Progressbar(training_frame, variable=self.progress_var,
-                                           maximum=100, length=600)
+        self.progress_bar = ttk.Progressbar(training_frame, variable=self.progress_var, maximum=100, length=600)
         self.progress_bar.pack(pady=10)
         
-        # Zone de log d'entraînement
         log_frame = ttk.LabelFrame(training_frame, text="Journal d'Entraînement")
         log_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        self.training_log = scrolledtext.ScrolledText(log_frame, height=8, wrap=tk.WORD)
+        self.training_log = scrolledtext.ScrolledText(log_frame, height=8, wrap=tk.WORD, state='disabled')
         self.training_log.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
     def create_pseudonymization_tab(self):
-        """
-        Crée l'onglet de pseudonymisation des textes
-        """
+        """ Crée l'onglet de pseudonymisation. """
+        # Ce code est correct, pas de changement nécessaire
         pseudo_frame = ttk.Frame(self.notebook)
         self.notebook.add(pseudo_frame, text="4. Pseudonymisation")
         
-        # Titre
-        title_label = tk.Label(pseudo_frame, text="Pseudonymisation de Texte", 
-                              font=("Arial", 16, "bold"))
+        title_label = tk.Label(pseudo_frame, text="Pseudonymisation de Texte", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        # Sélection du modèle
         model_frame = ttk.LabelFrame(pseudo_frame, text="Sélection du Modèle")
         model_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        select_model_button = tk.Button(model_frame, text="Sélectionner Modèle Entraîné",
-                                       command=self.select_trained_model, bg="#4CAF50", fg="white")
+        select_model_button = tk.Button(model_frame, text="Sélectionner Modèle Entraîné", command=self.select_trained_model, bg="#4CAF50", fg="white")
         select_model_button.pack(pady=10)
         
         self.model_status_label = tk.Label(model_frame, text="Aucun modèle sélectionné", fg="red")
         self.model_status_label.pack()
         
-        # Zone de texte à pseudonymiser avec boutons
         input_frame = ttk.LabelFrame(pseudo_frame, text="Texte à Pseudonymiser")
         input_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Boutons d'import/export pour le texte d'entrée
         input_buttons_frame = tk.Frame(input_frame)
         input_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        tk.Button(input_buttons_frame, text="Importer Fichier", 
-                 command=lambda: self.import_text_file(self.input_text),
-                 bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(input_buttons_frame, text="Effacer", 
-                 command=lambda: self.input_text.delete(1.0, tk.END),
-                 bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(input_buttons_frame, text="Importer Fichier", command=lambda: self.import_text_file(self.input_text), bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(input_buttons_frame, text="Effacer", command=lambda: self.input_text.delete(1.0, tk.END), bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.input_text = scrolledtext.ScrolledText(input_frame, height=8, wrap=tk.WORD)
         self.input_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        # Bouton de pseudonymisation
-        pseudo_button = tk.Button(pseudo_frame, text="Pseudonymiser",
-                                 command=self.pseudonymize_text,
-                                 bg="#FF9800", fg="white", font=("Arial", 12))
+        pseudo_button = tk.Button(pseudo_frame, text="Pseudonymiser", command=self.pseudonymize_text, bg="#FF9800", fg="white", font=("Arial", 12))
         pseudo_button.pack(pady=10)
         
-        # Zone de résultat avec boutons
         output_frame = ttk.LabelFrame(pseudo_frame, text="Texte Pseudonymisé")
         output_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Boutons d'export pour le texte de sortie
         output_buttons_frame = tk.Frame(output_frame)
         output_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        tk.Button(output_buttons_frame, text="Exporter Fichier", 
-                 command=lambda: self.export_text_file(self.output_text, "texte_pseudonymise.txt"),
-                 bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(output_buttons_frame, text="Copier vers Dépseudonymisation", 
-                 command=self.copy_to_depseudo,
-                 bg="#9C27B0", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(output_buttons_frame, text="Exporter Fichier", command=lambda: self.export_text_file(self.output_text, "texte_pseudonymise.txt"), bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(output_buttons_frame, text="Copier vers Dépseudonymisation", command=self.copy_to_depseudo, bg="#9C27B0", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.output_text = scrolledtext.ScrolledText(output_frame, height=8, wrap=tk.WORD)
         self.output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
     def create_depseudonymization_tab(self):
-        """
-        Crée l'onglet de dépseudonymisation
-        """
+        """ Crée l'onglet de dépseudonymisation. """
+        # Ce code est correct, pas de changement nécessaire
         depseudo_frame = ttk.Frame(self.notebook)
         self.notebook.add(depseudo_frame, text="5. Dépseudonymisation")
         
-        # Titre
-        title_label = tk.Label(depseudo_frame, text="Dépseudonymisation de Texte", 
-                              font=("Arial", 16, "bold"))
+        title_label = tk.Label(depseudo_frame, text="Dépseudonymisation de Texte", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        # Chargement du fichier de correspondance
         corresp_frame = ttk.LabelFrame(depseudo_frame, text="Fichier de Correspondance")
         corresp_frame.pack(fill=tk.X, padx=20, pady=10)
         
-        load_corresp_button = tk.Button(corresp_frame, text="Charger Fichier de Correspondance",
-                                       command=self.load_correspondence_file, bg="#4CAF50", fg="white")
+        load_corresp_button = tk.Button(corresp_frame, text="Charger Fichier de Correspondance", command=self.load_correspondence_file, bg="#4CAF50", fg="white")
         load_corresp_button.pack(pady=10)
         
         self.corresp_status_label = tk.Label(corresp_frame, text="Aucun fichier chargé", fg="red")
         self.corresp_status_label.pack()
         
-        # Zone de texte pseudonymisé
         pseudo_input_frame = ttk.LabelFrame(depseudo_frame, text="Texte Pseudonymisé")
         pseudo_input_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Boutons pour le texte pseudonymisé
         pseudo_buttons_frame = tk.Frame(pseudo_input_frame)
         pseudo_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        tk.Button(pseudo_buttons_frame, text="Importer Fichier", 
-                 command=lambda: self.import_text_file(self.pseudo_input_text),
-                 bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(pseudo_buttons_frame, text="Effacer", 
-                 command=lambda: self.pseudo_input_text.delete(1.0, tk.END),
-                 bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(pseudo_buttons_frame, text="Importer Fichier", command=lambda: self.import_text_file(self.pseudo_input_text), bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(pseudo_buttons_frame, text="Effacer", command=lambda: self.pseudo_input_text.delete(1.0, tk.END), bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.pseudo_input_text = scrolledtext.ScrolledText(pseudo_input_frame, height=8, wrap=tk.WORD)
         self.pseudo_input_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        # Bouton de dépseudonymisation
-        depseudo_button = tk.Button(depseudo_frame, text="Dépseudonymiser",
-                                   command=self.depseudonymize_text,
-                                   bg="#9C27B0", fg="white", font=("Arial", 12))
+        depseudo_button = tk.Button(depseudo_frame, text="Dépseudonymiser", command=self.depseudonymize_text, bg="#9C27B0", fg="white", font=("Arial", 12))
         depseudo_button.pack(pady=10)
         
-        # Zone de résultat
         depseudo_output_frame = ttk.LabelFrame(depseudo_frame, text="Texte Original Restauré")
         depseudo_output_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Boutons pour le texte restauré
         restore_buttons_frame = tk.Frame(depseudo_output_frame)
         restore_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        tk.Button(restore_buttons_frame, text="Exporter Fichier", 
-                 command=lambda: self.export_text_file(self.depseudo_output_text, "texte_original.txt"),
-                 bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(restore_buttons_frame, text="Exporter Fichier", command=lambda: self.export_text_file(self.depseudo_output_text, "texte_original.txt"), bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.depseudo_output_text = scrolledtext.ScrolledText(depseudo_output_frame, height=8, wrap=tk.WORD)
         self.depseudo_output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
     
-    # ======================
-    # MÉTHODES DE CONFIGURATION
-    # ======================
+    # ==============================================================================
+    # SECTION DES MÉTHODES DE LA CLASSE
+    # ==============================================================================
     
     def add_custom_entity(self):
-        """Ajoute une entité personnalisée à la liste"""
+        """ Ajoute une entité personnalisée à la liste. """
         entity = self.entity_entry.get().strip().upper()
         if entity and entity not in self.custom_entities:
             self.custom_entities.append(entity)
@@ -466,7 +333,7 @@ class PseudonymizationApp:
             messagebox.showwarning("Attention", f"L'entité '{entity}' existe déjà")
     
     def remove_custom_entity(self):
-        """Supprime l'entité sélectionnée"""
+        """ Supprime l'entité sélectionnée. """
         selection = self.entities_listbox.curselection()
         if selection:
             entity = self.entities_listbox.get(selection[0])
@@ -475,315 +342,147 @@ class PseudonymizationApp:
             self.update_status(f"Entité '{entity}' supprimée")
     
     def validate_configuration(self):
-        """Valide la configuration du modèle"""
+        """ Valide la configuration du modèle. """
         if not self.custom_entities:
-            messagebox.showwarning("Configuration incomplète", 
-                                 "Veuillez ajouter au moins une entité personnalisée")
+            messagebox.showwarning("Configuration incomplète", "Veuillez ajouter au moins une entité personnalisée.")
             return
         
-        messagebox.showinfo("Configuration validée", 
-                           f"Modèle de base: {self.selected_base_model.get()}\n"
-                           f"Entités personnalisées: {', '.join(self.custom_entities)}")
-        self.update_status("Configuration validée - Passez à l'étape suivante")
-    
-    # ======================
-    # MÉTHODES DE GÉNÉRATION DE DONNÉES
-    # ======================
+        messagebox.showinfo("Configuration validée", f"Modèle de base: {self.selected_base_model.get()}\nEntités: {', '.join(self.custom_entities)}")
+        self.update_status("Configuration validée. Prêt pour la génération de données.")
     
     def add_terms_file(self):
-        """
-        Permet à l'utilisateur d'ajouter un fichier contenant des termes
-        pour un type d'entité spécifique
-        """
+        """ Ouvre un dialogue pour ajouter un fichier de termes pour une entité. """
         if not self.custom_entities:
-            messagebox.showwarning("Configuration requise", 
-                                 "Veuillez d'abord configurer vos entités personnalisées dans l'onglet Configuration")
+            messagebox.showwarning("Configuration requise", "Veuillez d'abord définir vos entités personnalisées.")
             return
         
-        # Dialogue de sélection du fichier
-        filepath = filedialog.askopenfilename(
-            title="Sélectionner un fichier de termes",
-            filetypes=[("Fichiers texte", "*.txt"), ("Tous les fichiers", "*.*")]
-        )
-        
+        filepath = filedialog.askopenfilename(title="Sélectionner un fichier de termes", filetypes=[("Fichiers texte", "*.txt")])
         if not filepath:
             return
         
-        # Dialogue pour choisir le type d'entité
         entity_dialog = EntitySelectionDialog(self.root, self.custom_entities)
         selected_entity = entity_dialog.result
         
         if selected_entity:
-            # Ajoute le fichier à la liste
             self.entity_files[selected_entity] = filepath
-            
-            # Met à jour l'affichage
             display_text = f"{selected_entity}: {Path(filepath).name}"
             self.imported_files_list.insert(tk.END, display_text)
-            
             self.update_status(f"Fichier ajouté pour l'entité {selected_entity}")
-            
-            # Prévisualise quelques termes du fichier
-            try:
-                preview_terms = self.data_generator.load_terms_from_file(filepath)[:5]
-                preview_text = ", ".join(preview_terms)
-                if len(preview_terms) < 5:
-                    messagebox.showinfo("Fichier chargé", 
-                                      f"Fichier chargé pour {selected_entity}\n"
-                                      f"Termes: {preview_text}")
-                else:
-                    messagebox.showinfo("Fichier chargé", 
-                                      f"Fichier chargé pour {selected_entity}\n"
-                                      f"Premiers termes: {preview_text}...")
-            except Exception as e:
-                messagebox.showerror("Erreur", f"Erreur lors de la lecture du fichier: {e}")
 
     def generate_training_data(self):
-        """
-        Lance la génération automatique des données d'entraînement
-        """
+        """ Lance la génération automatique des données d'entraînement. """
         if not self.entity_files:
-            messagebox.showwarning("Fichiers manquants", 
-                                 "Veuillez d'abord ajouter des fichiers de termes")
+            messagebox.showwarning("Fichiers manquants", "Veuillez ajouter des fichiers de termes pour vos entités.")
             return
         
         try:
-            # Affiche un dialogue de progression
             progress_dialog = ProgressDialog(self.root, "Génération des données d'entraînement...")
-            
-            # Génère les données
             self.generated_training_data, stats = self.data_generator.generate_training_data(
                 self.entity_files,
-                sentences_per_term=self.sentences_per_term.get(),
-                add_variations=True
+                sentences_per_term=self.sentences_per_term.get()
             )
-            
             progress_dialog.destroy()
             
             if self.generated_training_data:
-                # Affiche un aperçu des données générées
-                preview_text = self.data_generator.preview_training_data(
-                    self.generated_training_data, max_examples=5
-                )
+                preview_text = self.data_generator.preview_training_data(self.generated_training_data, max_examples=5)
                 self.preview_text.delete(1.0, tk.END)
                 self.preview_text.insert(1.0, preview_text)
                 
-                # Propose de sauvegarder
-                if messagebox.askyesno("Sauvegarde", 
-                                     f"{len(self.generated_training_data)} exemples générés.\n"
-                                     "Voulez-vous sauvegarder ces données ?"):
-                    try:
-                        saved_path = self.data_generator.save_training_data(self.generated_training_data)
-                        self.training_data_path = saved_path
-                        messagebox.showinfo("Sauvegarde réussie", 
-                                          f"Données sauvegardées dans:\n{saved_path}")
-                    except Exception as e:
-                        messagebox.showerror("Erreur de sauvegarde", f"Erreur: {e}")
-                
-                self.update_status(f"Génération terminée: {len(self.generated_training_data)} exemples")
+                if messagebox.askyesno("Sauvegarde", f"{len(self.generated_training_data)} exemples générés.\nVoulez-vous les sauvegarder ?"):
+                    self.save_generated_data()
+                self.update_status(f"Génération terminée : {len(self.generated_training_data)} exemples créés.")
+                self.data_status_label.config(text=f"✅ {len(self.generated_training_data)} exemples prêts", fg="green")
             else:
-                messagebox.showwarning("Génération échouée", 
-                                     "Aucune donnée n'a pu être générée")
-        
+                messagebox.showwarning("Génération échouée", "Aucune donnée n'a pu être générée.")
         except Exception as e:
-            messagebox.showerror("Erreur de génération", f"Erreur lors de la génération: {e}")
+            messagebox.showerror("Erreur de génération", f"Une erreur est survenue : {e}")
+    
+    def save_generated_data(self):
+        """ Sauvegarde les données générées dans un fichier JSON. """
+        try:
+            saved_path = self.data_generator.save_training_data(self.generated_training_data)
+            self.training_data_path = saved_path
+            messagebox.showinfo("Sauvegarde réussie", f"Données sauvegardées dans :\n{saved_path}")
+        except Exception as e:
+            messagebox.showerror("Erreur de sauvegarde", f"Erreur : {e}")
 
     def load_training_data(self):
-        """
-        Charge des données d'entraînement depuis un fichier JSON
-        """
-        filepath = filedialog.askopenfilename(
-            title="Sélectionner le fichier de données d'entraînement",
-            filetypes=[("Fichiers JSON", "*.json"), ("Tous les fichiers", "*.*")]
-        )
-        
-        if filepath:
-            try:
-                with open(filepath, 'r', encoding='utf-8') as f:
-                    json_data = json.load(f)
-                
-                # Vérifie le format des données
-                if not json_data:
-                    raise ValueError("Le fichier est vide")
-                
-                # Convertit le format JSON vers le format SpaCy
-                training_data = []
-                
-                # Vérifie si c'est déjà une liste de tuples (données générées directement)
-                if isinstance(json_data, list) and len(json_data) > 0:
-                    first_item = json_data[0]
-                    
-                    # Si c'est déjà au format SpaCy (liste de tuples)
-                    if isinstance(first_item, list) and len(first_item) == 2:
-                        # Format: [(text, {"entities": [...]}), ...]
-                        training_data = json_data
-                        print("✅ Données au format SpaCy direct détectées")
-                    
-                    # Si c'est au format JSON standard
-                    elif isinstance(first_item, dict) and 'text' in first_item:
-                        # Format: [{"text": "...", "entities": [...]}, ...]
-                        for item in json_data:
-                            if not isinstance(item, dict):
-                                raise ValueError(f"Format d'item invalide: {type(item)}")
-                            
-                            text = item.get('text', '')
-                            entities = item.get('entities', [])
-                            
-                            if not text:
-                                print(f"⚠️ Texte vide ignoré: {item}")
-                                continue
-                                
-                            training_data.append((text, {"entities": entities}))
-                        print("✅ Données au format JSON standard converties")
-                    
-                    else:
-                        raise ValueError(f"Format de données non reconnu. Premier item: {first_item}")
-                
-                else:
-                    raise ValueError("Le fichier ne contient pas de données valides")
-                
-                if not training_data:
-                    raise ValueError("Aucune donnée d'entraînement valide trouvée")
-                
-                # Validation des données
-                valid_data = []
-                for i, (text, annotations) in enumerate(training_data):
-                    try:
-                        # Vérifie que le texte est une chaîne
-                        if not isinstance(text, str):
-                            print(f"⚠️ Texte invalide à l'index {i}: {type(text)}")
-                            continue
-                        
-                        # Vérifie que les annotations sont un dictionnaire
-                        if not isinstance(annotations, dict):
-                            print(f"⚠️ Annotations invalides à l'index {i}: {type(annotations)}")
-                            continue
-                        
-                        # Vérifie que 'entities' existe dans les annotations
-                        if 'entities' not in annotations:
-                            annotations = {"entities": []}
-                        
-                        # Vérifie le format des entités
-                        entities = annotations['entities']
-                        if not isinstance(entities, list):
-                            print(f"⚠️ Liste d'entités invalide à l'index {i}: {type(entities)}")
-                            continue
-                        
-                        # Vérifie chaque entité
-                        valid_entities = []
-                        for entity in entities:
-                            if isinstance(entity, (list, tuple)) and len(entity) == 3:
-                                start, end, label = entity
-                                if (isinstance(start, int) and isinstance(end, int) and 
-                                    isinstance(label, str) and 0 <= start < end <= len(text)):
-                                    valid_entities.append((start, end, label))
-                                else:
-                                    print(f"⚠️ Entité invalide ignorée: {entity}")
-                            else:
-                                print(f"⚠️ Format d'entité invalide: {entity}")
-                        
-                        valid_data.append((text, {"entities": valid_entities}))
-                        
-                    except Exception as e:
-                        print(f"⚠️ Erreur lors de la validation de l'item {i}: {e}")
-                        continue
-                
-                if not valid_data:
-                    raise ValueError("Aucune donnée valide après validation")
-                
-                self.generated_training_data = valid_data
-                self.training_data_path = filepath
-                
-                self.data_status_label.config(
-                    text=f"✅ {len(valid_data)} exemples chargés", 
-                    fg="green"
-                )
-                
-                # Affiche un aperçu des données chargées
-                if len(valid_data) != len(training_data):
-                    messagebox.showwarning("Données filtrées", 
-                                         f"{len(training_data)} exemples dans le fichier\n"
-                                         f"{len(valid_data)} exemples valides chargés\n"
-                                         f"{len(training_data) - len(valid_data)} exemples ignorés")
-                
-                self.update_status(f"Données d'entraînement chargées: {len(valid_data)} exemples")
-                
-                # Optionnel: Affiche un aperçu
-                if messagebox.askyesno("Aperçu", "Voulez-vous voir un aperçu des données chargées ?"):
-                    preview = self.data_generator.preview_training_data(valid_data, max_examples=3)
-                    messagebox.showinfo("Aperçu des données", preview)
-                
-            except json.JSONDecodeError as e:
-                messagebox.showerror("Erreur de format", 
-                                   f"Le fichier n'est pas un JSON valide:\n{e}")
-            except Exception as e:
-                messagebox.showerror("Erreur de chargement", 
-                                   f"Impossible de charger le fichier:\n{e}")
-    
-    # ======================
-    # MÉTHODES D'ENTRAÎNEMENT
-    # ======================
-    
-    def start_training(self):
-        """
-        Lance l'entraînement du modèle avec les données chargées
-        """
-        if not self.generated_training_data:
-            messagebox.showwarning("Données manquantes", 
-                                 "Veuillez d'abord générer ou charger des données d'entraînement")
+        """ Charge des données d'entraînement depuis un fichier JSON. """
+        filepath = filedialog.askopenfilename(title="Charger un fichier de données JSON", filetypes=[("Fichiers JSON", "*.json")])
+        if not filepath:
             return
-        if not isinstance(self.generated_training_data, list):
-            messagebox.showerror("Erreur de format", 
-                           "Les données d'entraînement ne sont pas au bon format")
-        return
-    
-        if len(self.generated_training_data) == 0:
-            messagebox.showerror("Données vides", 
-                           "Aucune donnée d'entraînement disponible")
-        return  
-
-      # Vérifie le format du premier élément
-        try:
-            first_item = self.generated_training_data[0]
-            if not (isinstance(first_item, (list, tuple)) and len(first_item) == 2):
-                raise ValueError("Format d'item invalide")
         
-            text, annotations = first_item
-            if not isinstance(text, str) or not isinstance(annotations, dict):
-                raise ValueError("Types d'item invalides")
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                json_data = json.load(f)
             
-        except (IndexError, ValueError) as e:
-            messagebox.showerror("Erreur de format", 
-                           f"Format des données d'entraînement invalide: {e}")
+            if not isinstance(json_data, list):
+                raise ValueError("Le fichier JSON doit contenir une liste d'exemples.")
+            
+            # Conversion au format SpaCy interne : [(text, {"entities": ...}), ...]
+            training_data = []
+            for item in json_data:
+                if 'text' in item and 'entities' in item:
+                    training_data.append((item['text'], {"entities": item['entities']}))
+            
+            if not training_data:
+                raise ValueError("Aucune donnée valide trouvée dans le fichier.")
+                
+            self.generated_training_data = training_data
+            self.training_data_path = filepath
+            
+            self.data_status_label.config(text=f"✅ {len(training_data)} exemples chargés", fg="green")
+            self.update_status(f"Données chargées : {len(training_data)} exemples.")
+            
+            if messagebox.askyesno("Aperçu", "Voulez-vous voir un aperçu des données chargées ?"):
+                preview = self.data_generator.preview_training_data(training_data, max_examples=3)
+                messagebox.showinfo("Aperçu des Données", preview)
+        except Exception as e:
+            messagebox.showerror("Erreur de chargement", f"Impossible de charger ou de valider le fichier :\n{e}")
+
+    # --- MÉTHODES D'ENTRAÎNEMENT CORRIGÉES ---
+
+    def set_training_state(self, is_training):
+        """ Active ou désactive les contrôles de l'interface pendant l'entraînement. """
+        state = 'disabled' if is_training else 'normal'
+        
+        # Bouton d'entraînement
+        self.train_button.config(state=state)
+        
+        # Contrôles des paramètres
+        self.epochs_spinbox.config(state=state)
+        self.batch_spinbox.config(state=state)
+
+        # Désactive les autres onglets
+        for i, tab in enumerate(self.notebook.tabs()):
+            if i != 2: # Ne désactive pas l'onglet d'entraînement lui-même
+                self.notebook.tab(i, state=state)
+
+    def start_training(self):
+        """ Lance l'entraînement du modèle (version robuste et corrigée). """
+        if self.training_in_progress:
+            messagebox.showwarning("Entraînement en cours", "Veuillez attendre la fin de l'entraînement actuel.")
             return
-        
+
+        if not self.generated_training_data:
+            messagebox.showwarning("Données manquantes", "Veuillez générer ou charger des données d'entraînement.")
+            return
+            
         if not self.custom_entities:
-            messagebox.showwarning("Configuration manquante", 
-                             "Veuillez d'abord configurer vos entités personnalisées")
-        return
-        
-        if not self.custom_entities:
-            messagebox.showwarning("Configuration manquante", 
-                                 "Veuillez d'abord configurer vos entités personnalisées")
+            messagebox.showwarning("Configuration manquante", "Veuillez définir au moins une entité personnalisée.")
             return
         
         try:
-            # Initialise le trainer
             self.model_trainer = SpacyModelTrainer(self.selected_base_model.get())
             
-            # Charge le modèle de base
             if not self.model_trainer.load_base_model():
-                messagebox.showerror("Erreur de modèle", 
-                                   f"Impossible de charger le modèle {self.selected_base_model.get()}")
+                messagebox.showerror("Erreur de modèle", f"Impossible de charger le modèle de base : {self.selected_base_model.get()}")
                 return
             
-            # Ajoute les entités personnalisées
             if not self.model_trainer.add_custom_entities(self.custom_entities):
-                messagebox.showerror("Erreur de configuration", 
-                                   "Impossible d'ajouter les entités personnalisées")
+                messagebox.showerror("Erreur de configuration", "Impossible d'ajouter les entités personnalisées au modèle.")
                 return
             
-            # Configuration d'entraînement
             training_config = {
                 'n_iter': self.epochs_var.get(),
                 'batch_size': self.batch_size_var.get(),
@@ -792,572 +491,287 @@ class PseudonymizationApp:
                 'validation_split': 0.2
             }
             
-            # Efface le log précédent
+            self.training_log.config(state='normal')
             self.training_log.delete(1.0, tk.END)
-            self.log_training_message("🚀 Début de l'entraînement...\n")
-            
-            # Lance l'entraînement dans un thread séparé pour ne pas bloquer l'interface
+            self.log_training_message("🚀 Initialisation de l'entraînement...\n")
+            self.training_log.config(state='disabled')
+
             training_thread = threading.Thread(
                 target=self._run_training,
-                args=(training_config,)
+                args=(training_config,),
+                daemon=True
             )
-            training_thread.daemon = True
             training_thread.start()
             
         except Exception as e:
-            messagebox.showerror("Erreur d'entraînement", f"Erreur lors du lancement: {e}")
+            messagebox.showerror("Erreur de lancement", f"Impossible de démarrer l'entraînement : {e}")
 
     def _run_training(self, config):
-        """
-        Exécute l'entraînement dans un thread séparé
-        
-        Args:
-            config: Configuration d'entraînement
-        """
+        """ Exécute l'entraînement dans un thread pour ne pas geler l'interface. """
         try:
-            # Fonction de callback pour le suivi de progression
+            self.training_in_progress = True
+            self.root.after(0, self.set_training_state, True)
+
             def progress_callback(current_epoch, total_epochs, epoch_info):
-                # Met à jour la barre de progression
-                progress_percent = (current_epoch / total_epochs) * 100
-                self.root.after(0, lambda: self.progress_var.set(progress_percent))
-                
-                # Met à jour le log
-                log_message = (f"Époque {current_epoch}/{total_epochs} | "
-                              f"Loss: {epoch_info.get('train_loss', 0):.4f} | "
-                              f"Val F1: {epoch_info.get('val_f1', 0):.3f} | "
-                              f"Temps: {epoch_info.get('epoch_time', 0):.1f}s\n")
-                
-                self.root.after(0, lambda: self.log_training_message(log_message))
+                self.root.after(0, self.progress_var.set, (current_epoch / total_epochs) * 100)
+                log_msg = f"Époque {current_epoch}/{total_epochs} | Perte: {epoch_info.get('train_loss', 0):.4f} | F1-Score (Val): {epoch_info.get('val_f1', 0):.3f}\n"
+                self.root.after(0, self.log_training_message, log_msg)
             
-            # Lance l'entraînement
-            results = self.model_trainer.train_model(
-                self.generated_training_data,
-                config,
-                progress_callback
-            )
-            
-            # Traite les résultats dans le thread principal
-            self.root.after(0, lambda: self._handle_training_results(results))
+            results = self.model_trainer.train_model(self.generated_training_data, config, progress_callback)
+            self.root.after(0, self._handle_training_results, results)
             
         except Exception as e:
-            error_msg = f"❌ Erreur pendant l'entraînement: {e}\n"
-            self.root.after(0, lambda: self.log_training_message(error_msg))
-            self.root.after(0, lambda: messagebox.showerror("Erreur d'entraînement", str(e)))
+            error_msg = f"❌ Erreur critique pendant l'entraînement: {e}\n"
+            self.root.after(0, self.log_training_message, error_msg)
+            # Correction de la NameError avec une lambda qui capture 'e'
+            self.root.after(0, lambda err=e: messagebox.showerror("Erreur d'entraînement", str(err)))
+            
+        finally:
+            self.training_in_progress = False
+            # Le bloc finally garantit que l'interface est toujours réactivée
+            self.root.after(0, self.set_training_state, False)
 
     def _handle_training_results(self, results):
-        """
-        Traite les résultats de l'entraînement
-        
-        Args:
-            results: Résultats retournés par le trainer
-        """
-        if results.get('success', False):
-            # Entraînement réussi
-            final_metrics = results.get('final_metrics', {})
-            
-            success_message = (f"🎉 Entraînement terminé avec succès!\n"
-                              f"📊 Métriques finales:\n"
-                              f"  - Précision: {final_metrics.get('precision', 0):.3f}\n"
-                              f"  - Rappel: {final_metrics.get('recall', 0):.3f}\n"
-                              f"  - F1-Score: {final_metrics.get('f1', 0):.3f}\n"
-                              f"  - Époques: {results.get('epochs_completed', 0)}\n\n")
-            
-            self.log_training_message(success_message)
-            
-            # Propose de sauvegarder le modèle
-            if messagebox.askyesno("Sauvegarde du modèle", 
-                                 "Entraînement terminé avec succès!\n"
-                                 "Voulez-vous sauvegarder le modèle entraîné ?"):
-                self.save_trained_model(results)
-            
-            # Met à jour le statut
-            self.update_status(f"Entraînement terminé - F1-Score: {final_metrics.get('f1', 0):.3f}")
-            
-        else:
-            # Entraînement échoué
-            error_message = f"❌ Échec de l'entraînement: {results.get('error', 'Erreur inconnue')}\n"
-            self.log_training_message(error_message)
-            messagebox.showerror("Échec de l'entraînement", results.get('error', 'Erreur inconnue'))
-        
-        # Remet la barre de progression à zéro
+        """ Traite et affiche les résultats à la fin de l'entraînement. """
         self.progress_var.set(0)
+        if results.get('success', False):
+            final_metrics = results.get('final_metrics', {})
+            success_msg = f"🎉 Entraînement terminé !\n📊 F1-Score final: {final_metrics.get('f1', 0):.3f}\n"
+            self.log_training_message(success_msg)
+            self.update_status(f"✅ Entraînement terminé. F1-Score: {final_metrics.get('f1', 0):.3f}")
+            
+            if messagebox.askyesno("Sauvegarde du Modèle", f"Entraînement réussi !\nF1-Score: {final_metrics.get('f1', 0):.3f}\n\nVoulez-vous sauvegarder ce modèle ?"):
+                self.save_trained_model(results)
+        else:
+            error_msg = f"❌ Échec de l'entraînement: {results.get('error', 'Erreur inconnue')}\n"
+            self.log_training_message(error_msg)
+            self.update_status("❌ Échec de l'entraînement.")
+            messagebox.showerror("Échec de l'entraînement", results.get('error', 'Erreur inconnue'))
 
     def save_trained_model(self, training_results):
-        """
-        Sauvegarde le modèle entraîné
-        
-        Args:
-            training_results: Résultats de l'entraînement
-        """
-        try:
-            # Dialogue pour choisir l'emplacement
-            save_path = filedialog.askdirectory(
-                title="Choisir le dossier de sauvegarde du modèle"
-            )
+        """ Sauvegarde le modèle entraîné. """
+        save_path = filedialog.askdirectory(title="Choisir un dossier pour sauvegarder le modèle")
+        if not save_path:
+            return
             
-            if save_path:
-                # Informations du modèle
-                model_info = {
-                    'training_date': datetime.now().isoformat(),
-                    'base_model': self.selected_base_model.get(),
-                    'custom_entities': self.custom_entities,
-                    'training_examples': len(self.generated_training_data),
-                    'final_metrics': training_results.get('final_metrics', {})
-                }
-                
-                # Sauvegarde
-                model_path = self.model_trainer.save_model(save_path, model_info)
-                self.trained_model_path = model_path
-                
-                messagebox.showinfo("Sauvegarde réussie", 
-                                  f"Modèle sauvegardé avec succès dans:\n{model_path}")
-                
-                self.log_training_message(f"💾 Modèle sauvegardé: {model_path}\n")
-                
+        try:
+            model_info = {
+                'training_date': datetime.now().isoformat(),
+                'base_model': self.selected_base_model.get(),
+                'custom_entities': self.custom_entities,
+                'final_metrics': training_results.get('final_metrics', {})
+            }
+            model_path = self.model_trainer.save_model(save_path, model_info)
+            self.trained_model_path = model_path
+            messagebox.showinfo("Sauvegarde réussie", f"Modèle sauvegardé dans :\n{model_path}")
+            self.log_training_message(f"💾 Modèle sauvegardé : {model_path}\n")
         except Exception as e:
-            messagebox.showerror("Erreur de sauvegarde", f"Erreur lors de la sauvegarde: {e}")
+            messagebox.showerror("Erreur de sauvegarde", f"Erreur : {e}")
 
+    # --- AUTRES MÉTHODES ---
+    
     def log_training_message(self, message):
-        """
-        Ajoute un message au log d'entraînement
-        
-        Args:
-            message: Message à ajouter
-        """
+        """ Ajoute un message au log d'entraînement de manière sécurisée. """
+        self.training_log.config(state='normal')
         self.training_log.insert(tk.END, message)
-        self.training_log.see(tk.END)  # Fait défiler vers le bas
-        self.root.update_idletasks()  # Met à jour l'affichage
+        self.training_log.see(tk.END)
+        self.training_log.config(state='disabled')
+        self.root.update_idletasks()
 
     def select_trained_model(self):
-        """
-        Permet à l'utilisateur de sélectionner un modèle entraîné
-        """
-        model_path = filedialog.askdirectory(
-            title="Sélectionner le dossier du modèle entraîné"
-        )
-        
-        if model_path:
-            try:
-                # Teste le chargement du modèle
-                test_trainer = SpacyModelTrainer()
-                if test_trainer.load_trained_model(model_path):
-                    self.trained_model_path = model_path
-                    
-                    # Met à jour l'affichage
-                    model_name = Path(model_path).name
-                    self.model_status_label.config(
-                        text=f"✅ Modèle chargé: {model_name}", 
-                        fg="green"
-                    )
-                    
-                    # Affiche les informations du modèle
-                    model_info = test_trainer.get_model_info()
-                    info_text = (f"Modèle: {model_info.get('base_model', 'Unknown')}\n"
-                                f"Entités: {', '.join(model_info.get('custom_entities', []))}\n"
-                                f"Composants: {', '.join(model_info.get('pipeline_components', []))}")
-                    
-                    messagebox.showinfo("Modèle chargé", info_text)
-                    
-                    self.update_status(f"Modèle sélectionné: {model_name}")
-                    
-                else:
-                    messagebox.showerror("Erreur", "Impossible de charger le modèle sélectionné")
-                    
-            except Exception as e:
-                messagebox.showerror("Erreur de chargement", f"Erreur: {e}")
+        """ Permet de sélectionner un dossier contenant un modèle entraîné. """
+        model_path = filedialog.askdirectory(title="Sélectionner le dossier du modèle entraîné")
+        if not model_path:
+            return
+
+        try:
+            # On utilise une instance temporaire pour ne pas écraser le trainer actuel
+            test_trainer = SpacyModelTrainer()
+            if test_trainer.load_trained_model(model_path):
+                self.trained_model_path = model_path
+                model_name = Path(model_path).name
+                self.model_status_label.config(text=f"✅ Modèle chargé: {model_name}", fg="green")
+                
+                model_info = test_trainer.get_model_info()
+                info_text = (f"Modèle: {model_info.get('base_model', 'N/A')}\n"
+                             f"Entités: {', '.join(model_info.get('custom_entities', []))}\n"
+                             f"Pipeline: {', '.join(model_info.get('pipeline_components', []))}")
+                messagebox.showinfo("Modèle Chargé", info_text)
+                self.update_status(f"Modèle sélectionné : {model_name}")
+            else:
+                messagebox.showerror("Erreur", "Le dossier sélectionné ne semble pas contenir un modèle SpaCy valide.")
+        except Exception as e:
+            messagebox.showerror("Erreur de chargement", f"Erreur : {e}")
 
     def test_trained_model(self):
-        """
-        Permet de tester le modèle entraîné sur un texte d'exemple
-        """
+        """ Permet de tester le modèle actuellement chargé. """
         if not self.trained_model_path:
-            messagebox.showwarning("Modèle manquant", "Veuillez d'abord sélectionner un modèle entraîné")
+            messagebox.showwarning("Modèle manquant", "Veuillez d'abord sélectionner un modèle entraîné.")
             return
         
-        # Dialogue pour saisir le texte de test
         test_dialog = TestModelDialog(self.root)
-        test_text = test_dialog.result
-        
-        if test_text:
-            try:
-                # Charge le modèle si nécessaire
-                if not hasattr(self, 'model_trainer') or not self.model_trainer:
-                    self.model_trainer = SpacyModelTrainer()
-                    self.model_trainer.load_trained_model(self.trained_model_path)
-                
-                # Teste le modèle
-                results = self.model_trainer.test_model(test_text)
-                
-                if results.get('processed_successfully', False):
-                    # Affiche les résultats
-                    entities = results.get('entities', [])
-                    result_text = f"Texte testé: {test_text}\n\n"
-                    result_text += f"Entités détectées ({len(entities)}):\n"
-                    
-                    for ent in entities:
-                        result_text += f"- '{ent['text']}' ({ent['label']}) [pos: {ent['start']}-{ent['end']}]\n"
-                    
-                    if not entities:
-                        result_text += "Aucune entité détectée.\n"
-                    
-                    messagebox.showinfo("Résultats du test", result_text)
-                else:
-                    messagebox.showerror("Erreur de test", results.get('error', 'Erreur inconnue'))
-                    
-            except Exception as e:
-                messagebox.showerror("Erreur", f"Erreur lors du test: {e}")
-    
-    # ======================
-    # MÉTHODES DE PSEUDONYMISATION
-    # ======================
+        if not test_dialog.result:
+            return
+            
+        try:
+            if not self.model_trainer or self.model_trainer.nlp is None:
+                self.model_trainer = SpacyModelTrainer()
+                self.model_trainer.load_trained_model(self.trained_model_path)
+
+            results = self.model_trainer.test_model(test_dialog.result)
+            
+            if results.get('processed_successfully'):
+                entities = results.get('entities', [])
+                result_text = f"Texte analysé :\n{test_dialog.result}\n\nEntités détectées ({len(entities)}):\n"
+                result_text += "\n".join([f"- '{ent['text']}' ({ent['label']})" for ent in entities])
+                if not entities:
+                    result_text += "Aucune entité détectée."
+                messagebox.showinfo("Résultats du Test", result_text)
+            else:
+                messagebox.showerror("Erreur de test", results.get('error', 'Erreur inconnue'))
+        except Exception as e:
+            messagebox.showerror("Erreur de test", f"Erreur : {e}")
     
     def pseudonymize_text(self):
-        """
-        Pseudonymise le texte saisi par l'utilisateur
-        """
+        """ Pseudonymise le texte de l'onglet de pseudonymisation. """
         if not self.trained_model_path:
-            messagebox.showwarning("Modèle manquant", 
-                                 "Veuillez d'abord sélectionner un modèle entraîné")
+            messagebox.showwarning("Modèle manquant", "Veuillez sélectionner un modèle entraîné.")
             return
         
-        # Récupère le texte à pseudonymiser
         input_text = self.input_text.get(1.0, tk.END).strip()
-        
         if not input_text:
-            messagebox.showwarning("Texte manquant", 
-                                 "Veuillez saisir un texte à pseudonymiser")
+            messagebox.showwarning("Texte manquant", "Veuillez saisir un texte à pseudonymiser.")
             return
         
         try:
-            # Initialise le pseudonymiseur si nécessaire
-            if not self.pseudonymizer:
+            if self.pseudonymizer is None:
                 self.pseudonymizer = TextPseudonymizer()
-                if not self.pseudonymizer.load_model(self.trained_model_path):
-                    messagebox.showerror("Erreur de modèle", 
-                                       "Impossible de charger le modèle pour la pseudonymisation")
-                    return
+                self.pseudonymizer.load_model(self.trained_model_path)
+
+            # Utilise les entités du modèle chargé pour le dialogue
+            entities_in_model = self.pseudonymizer.nlp.get_pipe("ner").labels
             
-            # Dialogue pour sélectionner les types d'entités à masquer
-            entity_selection = EntityMaskingDialog(self.root, self.custom_entities)
-            selected_entities = entity_selection.result
-            
-            if selected_entities is None:  # Annulé
+            entity_selection = EntityMaskingDialog(self.root, list(entities_in_model))
+            if entity_selection.result is None: # L'utilisateur a annulé
                 return
-            
-            # Prévisualisation optionnelle
-            if messagebox.askyesno("Prévisualisation", 
-                                 "Voulez-vous prévisualiser les entités qui seront pseudonymisées ?"):
-                try:
-                    preview = self.pseudonymizer.preview_pseudonymization(
-                        input_text, selected_entities if selected_entities else None
-                    )
-                    
-                    preview_text = self._format_preview_text(preview)
-                    
-                    # Affiche la prévisualisation
-                    if not messagebox.askyesno("Continuer la pseudonymisation", preview_text):
-                        return
-                        
-                except Exception as e:
-                    messagebox.showerror("Erreur de prévisualisation", f"Erreur: {e}")
-                    return
-            
-            # Effectue la pseudonymisation
-            self.update_status("Pseudonymisation en cours...")
-            
+
             pseudonymized_text, stats = self.pseudonymizer.pseudonymize_text(
                 input_text,
-                entity_types_to_mask=selected_entities if selected_entities else None,
-                preserve_format=True
+                entity_types_to_mask=entity_selection.result if entity_selection.result else None
             )
             
-            # Affiche le résultat
             self.output_text.delete(1.0, tk.END)
             self.output_text.insert(1.0, pseudonymized_text)
             
-            # Affiche les statistiques
             stats_message = self._format_pseudonymization_stats(stats)
-            
-            # Propose de sauvegarder le fichier de correspondance
-            if messagebox.askyesno("Sauvegarde des correspondances", 
-                                 f"Pseudonymisation terminée!\n\n{stats_message}\n\n"
-                                 "Voulez-vous sauvegarder le fichier de correspondance ?"):
+            if messagebox.askyesno("Sauvegarde", f"Pseudonymisation terminée !\n\n{stats_message}\n\nVoulez-vous sauvegarder le fichier de correspondance ?"):
                 self.save_correspondence_file(stats)
-            
-            self.update_status(f"Pseudonymisation terminée - {stats['entities_processed']} entités traitées")
+            self.update_status(f"Pseudonymisation terminée : {stats['entities_processed']} entités traitées.")
             
         except Exception as e:
-            messagebox.showerror("Erreur de pseudonymisation", f"Erreur: {e}")
-            self.update_status("Erreur lors de la pseudonymisation")
-
-    def _format_preview_text(self, preview):
-        """
-        Formate le texte de prévisualisation de la pseudonymisation
-        
-        Args:
-            preview: Données de prévisualisation
-            
-        Returns:
-            str: Texte formaté pour l'affichage
-        """
-        text = f"PRÉVISUALISATION DE LA PSEUDONYMISATION\n{'='*50}\n\n"
-        text += f"Total d'entités détectées: {preview['total_entities']}\n"
-        text += f"Nouveaux pseudonymes à créer: {preview['would_create_pseudonyms']}\n"
-        text += f"Pseudonymes existants réutilisés: {preview['would_reuse_pseudonyms']}\n\n"
-        
-        if preview['entities_by_type']:
-            text += "RÉPARTITION PAR TYPE D'ENTITÉ:\n"
-            text += "-" * 30 + "\n"
-            for entity_type, count in preview['entities_by_type'].items():
-                text += f"{entity_type}: {count} entité(s)\n"
-            text += "\n"
-        
-        if preview['entities_details']:
-            text += "DÉTAIL DES ENTITÉS (premières 10):\n"
-            text += "-" * 35 + "\n"
-            for i, entity in enumerate(preview['entities_details'][:10]):
-                status = "NOUVEAU" if entity['is_new'] else "EXISTANT"
-                text += f"{i+1}. '{entity['original']}' ({entity['type']}) → {entity['pseudonym']} [{status}]\n"
-            
-            if len(preview['entities_details']) > 10:
-                text += f"... et {len(preview['entities_details']) - 10} autres entités\n"
-        
-        text += "\nVoulez-vous continuer avec la pseudonymisation ?"
-        return text
+            messagebox.showerror("Erreur de pseudonymisation", f"Erreur : {e}")
 
     def _format_pseudonymization_stats(self, stats):
-        """
-        Formate les statistiques de pseudonymisation
-        
-        Args:
-            stats: Statistiques de pseudonymisation
-            
-        Returns:
-            str: Texte formaté
-        """
+        """ Met en forme les statistiques de pseudonymisation pour l'affichage. """
         text = f"Entités traitées: {stats['entities_processed']}\n"
-        text += f"Nouveaux pseudonymes créés: {stats['pseudonyms_created']}\n"
-        text += f"Pseudonymes réutilisés: {stats['pseudonyms_reused']}\n"
-        
-        if stats['entities_by_type']:
-            text += "\nRépartition par type:\n"
-            for entity_type, count in stats['entities_by_type'].items():
-                text += f"- {entity_type}: {count}\n"
-        
+        text += f"Nouveaux pseudonymes: {stats['pseudonyms_created']}\n"
+        text += f"Pseudonymes réutilisés: {stats['pseudonyms_reused']}"
         return text
 
     def save_correspondence_file(self, pseudonymization_stats):
-        """
-        Sauvegarde le fichier de correspondance
-        
-        Args:
-            pseudonymization_stats: Statistiques de la pseudonymisation
-        """
-        try:
-            # Dialogue pour choisir l'emplacement
-            filepath = filedialog.asksaveasfilename(
-                title="Sauvegarder le fichier de correspondance",
-                defaultextension=".json",
-                filetypes=[("Fichiers JSON", "*.json"), ("Tous les fichiers", "*.*")]
-            )
-            
-            if filepath:
-                # Informations supplémentaires à inclure
-                additional_info = {
-                    'pseudonymization_stats': pseudonymization_stats,
-                    'model_used': self.trained_model_path,
-                    'custom_entities': self.custom_entities,
-                    'creation_context': 'manual_pseudonymization'
-                }
-                
-                # Sauvegarde
-                saved_path = self.pseudonymizer.save_correspondence_file(filepath, additional_info)
+        """ Sauvegarde le fichier de correspondance après pseudonymisation. """
+        filepath = filedialog.asksaveasfilename(title="Sauvegarder le fichier de correspondance", defaultextension=".json", filetypes=[("Fichiers JSON", "*.json")])
+        if filepath:
+            try:
+                saved_path = self.pseudonymizer.save_correspondence_file(filepath)
                 self.correspondence_file_path = saved_path
-                
-                messagebox.showinfo("Sauvegarde réussie", 
-                                  f"Fichier de correspondance sauvegardé:\n{saved_path}")
-                
-        except Exception as e:
-            messagebox.showerror("Erreur de sauvegarde", f"Erreur: {e}")
+                messagebox.showinfo("Sauvegarde réussie", f"Fichier sauvegardé dans:\n{saved_path}")
+            except Exception as e:
+                messagebox.showerror("Erreur de sauvegarde", f"Erreur: {e}")
 
     def copy_to_depseudo(self):
-        """
-        Copie le texte pseudonymisé vers l'onglet de dépseudonymisation
-        """
+        """ Copie le texte pseudonymisé vers l'onglet de dépseudonymisation. """
         pseudonymized_text = self.output_text.get(1.0, tk.END).strip()
         if pseudonymized_text:
             self.pseudo_input_text.delete(1.0, tk.END)
             self.pseudo_input_text.insert(1.0, pseudonymized_text)
-            
-            # Passe à l'onglet de dépseudonymisation
-            self.notebook.select(4)  # Index de l'onglet dépseudonymisation
-            
-            messagebox.showinfo("Copie effectuée", "Texte copié vers l'onglet de dépseudonymisation")
+            self.notebook.select(4)
+            self.update_status("Texte copié pour la dépseudonymisation.")
         else:
-            messagebox.showwarning("Aucun contenu", "Aucun texte pseudonymisé à copier")
-    
-    # ======================
-    # MÉTHODES DE DÉPSEUDONYMISATION
-    # ======================
+            messagebox.showwarning("Aucun texte", "Il n'y a pas de texte à copier.")
     
     def load_correspondence_file(self):
-        """
-        Charge un fichier de correspondance pour la dépseudonymisation
-        """
-        filepath = filedialog.askopenfilename(
-            title="Sélectionner le fichier de correspondance",
-            filetypes=[("Fichiers JSON", "*.json"), ("Tous les fichiers", "*.*")]
-        )
-        
-        if filepath:
-            try:
-                # Initialise le pseudonymiseur si nécessaire
-                if not self.pseudonymizer:
-                    self.pseudonymizer = TextPseudonymizer()
-                
-                # Charge le fichier de correspondance
-                if self.pseudonymizer.load_correspondence_file(filepath):
-                    self.correspondence_file_path = filepath
-                    
-                    # Met à jour l'affichage
-                    filename = Path(filepath).name
-                    self.corresp_status_label.config(
-                        text=f"✅ Fichier chargé: {filename}", 
-                        fg="green"
-                    )
-                    
-                    # Affiche les informations du fichier
-                    summary = self.pseudonymizer.get_pseudonymization_summary()
-                    info_text = (f"Correspondances chargées: {summary['total_pseudonyms']}\n"
-                                f"Types d'entités: {', '.join(summary['entity_types_processed'])}")
-                    
-                    messagebox.showinfo("Fichier chargé", info_text)
-                    
-                    self.update_status(f"Correspondances chargées: {summary['total_pseudonyms']} pseudonymes")
-                    
-                else:
-                    messagebox.showerror("Erreur", "Impossible de charger le fichier de correspondance")
-                    
-            except Exception as e:
-                messagebox.showerror("Erreur de chargement", f"Erreur: {e}")
+        """ Charge un fichier de correspondance pour la dépseudonymisation. """
+        filepath = filedialog.askopenfilename(title="Charger un fichier de correspondance", filetypes=[("Fichiers JSON", "*.json")])
+        if not filepath:
+            return
+            
+        try:
+            if self.pseudonymizer is None:
+                self.pseudonymizer = TextPseudonymizer()
+
+            if self.pseudonymizer.load_correspondence_file(filepath):
+                self.correspondence_file_path = filepath
+                filename = Path(filepath).name
+                self.corresp_status_label.config(text=f"✅ Fichier chargé: {filename}", fg="green")
+                summary = self.pseudonymizer.get_pseudonymization_summary()
+                self.update_status(f"Correspondances chargées : {summary['total_pseudonyms']} pseudonymes.")
+            else:
+                messagebox.showerror("Erreur", "Impossible de charger ce fichier de correspondance.")
+        except Exception as e:
+            messagebox.showerror("Erreur de chargement", f"Erreur : {e}")
 
     def depseudonymize_text(self):
-        """
-        Dépseudonymise le texte saisi par l'utilisateur
-        """
-        if not self.correspondence_file_path and not (self.pseudonymizer and self.pseudonymizer.correspondence_map):
-            messagebox.showwarning("Correspondances manquantes", 
-                                 "Veuillez d'abord charger un fichier de correspondance")
+        """ Dépseudonymise le texte en utilisant le fichier de correspondance chargé. """
+        if not self.correspondence_file_path:
+            messagebox.showwarning("Fichier manquant", "Veuillez charger un fichier de correspondance.")
             return
         
-        # Récupère le texte pseudonymisé
         pseudo_text = self.pseudo_input_text.get(1.0, tk.END).strip()
-        
         if not pseudo_text:
-            messagebox.showwarning("Texte manquant", 
-                                 "Veuillez saisir un texte pseudonymisé à restaurer")
+            messagebox.showwarning("Texte manquant", "Veuillez saisir un texte à dépseudonymiser.")
             return
         
         try:
-            # Initialise le pseudonymiseur si nécessaire
-            if not self.pseudonymizer:
-                self.pseudonymizer = TextPseudonymizer()
-                
-                # Charge le fichier de correspondance
-                if self.correspondence_file_path:
-                    if not self.pseudonymizer.load_correspondence_file(self.correspondence_file_path):
-                        messagebox.showerror("Erreur", "Impossible de charger les correspondances")
-                        return
-            
-            # Effectue la dépseudonymisation
-            self.update_status("Dépseudonymisation en cours...")
-            
             depseudonymized_text = self.pseudonymizer.depseudonymize_text(pseudo_text)
-            
-            # Affiche le résultat
             self.depseudo_output_text.delete(1.0, tk.END)
             self.depseudo_output_text.insert(1.0, depseudonymized_text)
-            
-            # Calcule quelques statistiques
-            original_pseudonyms = len([word for word in pseudo_text.split() 
-                                     if any(word.startswith(prefix) for prefix in 
-                                           ['PERS_', 'ETAB_', 'ORG_', 'LIEU_', 'CODE_'])])
-            
-            messagebox.showinfo("Dépseudonymisation terminée", 
-                              f"Texte restauré avec succès!\n"
-                              f"Pseudonymes détectés et remplacés: {original_pseudonyms} (estimation)")
-            
-            self.update_status("Dépseudonymisation terminée avec succès")
-            
+            self.update_status("Dépseudonymisation terminée avec succès.")
         except Exception as e:
-            messagebox.showerror("Erreur de dépseudonymisation", f"Erreur: {e}")
-            self.update_status("Erreur lors de la dépseudonymisation")
-    
-    # ======================
-    # MÉTHODES UTILITAIRES
-    # ======================
+            messagebox.showerror("Erreur de dépseudonymisation", f"Erreur : {e}")
     
     def import_text_file(self, text_widget):
-        """
-        Importe un fichier texte dans un widget de texte
-        
-        Args:
-            text_widget: Widget de texte où insérer le contenu
-        """
-        filepath = filedialog.askopenfilename(
-            title="Importer un fichier texte",
-            filetypes=[("Fichiers texte", "*.txt"), ("Tous les fichiers", "*.*")]
-        )
-        
+        """ Utilitaire pour importer un fichier texte dans une zone de texte. """
+        filepath = filedialog.askopenfilename(title="Importer un fichier texte", filetypes=[("Fichiers texte", "*.txt")])
         if filepath:
             try:
                 with open(filepath, 'r', encoding='utf-8') as f:
                     content = f.read()
-                
                 text_widget.delete(1.0, tk.END)
                 text_widget.insert(1.0, content)
-                
-                self.update_status(f"Fichier importé: {Path(filepath).name}")
-                
+                self.update_status(f"Fichier importé : {Path(filepath).name}")
             except Exception as e:
-                messagebox.showerror("Erreur d'importation", f"Erreur: {e}")
+                messagebox.showerror("Erreur d'importation", f"Erreur : {e}")
 
     def export_text_file(self, text_widget, default_name="exported_text.txt"):
-        """
-        Exporte le contenu d'un widget de texte vers un fichier
-        
-        Args:
-            text_widget: Widget de texte à exporter
-            default_name: Nom de fichier par défaut
-        """
+        """ Utilitaire pour exporter le contenu d'une zone de texte. """
         content = text_widget.get(1.0, tk.END).strip()
-        
         if not content:
-            messagebox.showwarning("Contenu vide", "Aucun contenu à exporter")
+            messagebox.showwarning("Contenu vide", "Il n'y a rien à exporter.")
             return
         
-        filepath = filedialog.asksaveasfilename(
-            title="Exporter vers un fichier",
-            defaultextension=".txt",
-            initialvalue=default_name,
-            filetypes=[("Fichiers texte", "*.txt"), ("Tous les fichiers", "*.*")]
-        )
-        
+        filepath = filedialog.asksaveasfilename(title="Exporter le texte", defaultextension=".txt", initialfile=default_name, filetypes=[("Fichiers texte", "*.txt")])
         if filepath:
             try:
                 with open(filepath, 'w', encoding='utf-8') as f:
                     f.write(content)
-                
-                messagebox.showinfo("Export réussi", f"Contenu exporté vers:\n{filepath}")
-                self.update_status(f"Fichier exporté: {Path(filepath).name}")
-                
+                messagebox.showinfo("Export réussi", f"Fichier exporté vers :\n{filepath}")
             except Exception as e:
-                messagebox.showerror("Erreur d'export", f"Erreur: {e}")
+                messagebox.showerror("Erreur d'exportation", f"Erreur : {e}")
     
     def update_status(self, message):
-        """Met à jour la barre de statut"""
+        """ Met à jour la barre de statut en bas de la fenêtre. """
         self.status_bar.config(text=message)
-
 
 # ======================
 # CLASSES DE DIALOGUES
@@ -1604,3 +1018,248 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# def start_training(self):
+#     """
+#     Lance l'entraînement du modèle avec les données chargées
+#     """
+#     if not self.generated_training_data:
+#         messagebox.showwarning("Données manquantes", 
+#                              "Veuillez d'abord générer ou charger des données d'entraînement")
+#     return
+    
+#     # Vérifie le format des données avant l'entraînement
+#     if not isinstance(self.generated_training_data, list):
+#         messagebox.showerror("Erreur de format", 
+#                            "Les données d'entraînement ne sont pas au bon format")
+#         return
+    
+#     if len(self.generated_training_data) == 0:
+#         messagebox.showerror("Données vides", 
+#                            "Aucune donnée d'entraînement disponible")
+#         return
+    
+#     # Vérifie le format du premier élément
+#     try:
+#         first_item = self.generated_training_data[0]
+#         if not (isinstance(first_item, (list, tuple)) and len(first_item) == 2):
+#             raise ValueError("Format d'item invalide")
+        
+#         text, annotations = first_item
+#         if not isinstance(text, str) or not isinstance(annotations, dict):
+#             raise ValueError("Types d'item invalides")
+            
+#     except (IndexError, ValueError) as e:
+#         messagebox.showerror("Erreur de format", 
+#                            f"Format des données d'entraînement invalide: {e}")
+#         return
+    
+#     if not self.custom_entities:
+#         messagebox.showwarning("Configuration manquante", 
+#                              "Veuillez d'abord configurer vos entités personnalisées")
+#         return
+    
+#     # Vérifie si un entraînement est déjà en cours
+#     if hasattr(self, 'training_in_progress') and self.training_in_progress:
+#         messagebox.showwarning("Entraînement en cours", 
+#                              "Un entraînement est déjà en cours. Veuillez patienter.")
+#         return
+    
+#     try:
+#         # Initialise le trainer
+#         self.model_trainer = SpacyModelTrainer(self.selected_base_model.get())
+        
+#         # Charge le modèle de base
+#         self.log_training_message("📥 Chargement du modèle de base...\n")
+#         if not self.model_trainer.load_base_model():
+#             messagebox.showerror("Erreur de modèle", 
+#                                f"Impossible de charger le modèle {self.selected_base_model.get()}")
+#             return
+        
+#         # Ajoute les entités personnalisées
+#         self.log_training_message("🏷️ Ajout des entités personnalisées...\n")
+#         if not self.model_trainer.add_custom_entities(self.custom_entities):
+#             messagebox.showerror("Erreur de configuration", 
+#                                "Impossible d'ajouter les entités personnalisées")
+#             return
+        
+#         # Configuration d'entraînement
+#         training_config = {
+#             'n_iter': self.epochs_var.get(),
+#             'batch_size': self.batch_size_var.get(),
+#             'dropout': 0.2,
+#             'patience': 5,
+#             'validation_split': 0.2
+#         }
+        
+#         # Efface le log précédent
+#         self.training_log.delete(1.0, tk.END)
+#         self.log_training_message("🚀 Initialisation de l'entraînement...\n")
+#         self.log_training_message(f"📊 Configuration: {training_config}\n")
+#         self.log_training_message(f"📦 Données: {len(self.generated_training_data)} exemples\n\n")
+        
+#         # Désactive les boutons pendant l'entraînement
+#         self.set_training_state(True)
+        
+#         # Lance l'entraînement dans un thread séparé
+#         training_thread = threading.Thread(
+#             target=self._run_training,
+#             args=(training_config,),
+#             daemon=True
+#         )
+#         training_thread.start()
+        
+#         # Marque l'entraînement comme en cours
+#         self.training_in_progress = True
+        
+#         self.update_status("Entraînement en cours - Veuillez patienter...")
+        
+#     except Exception as e:
+#         self.log_training_message(f"❌ Erreur lors de l'initialisation: {e}\n")
+#         messagebox.showerror("Erreur d'entraînement", f"Erreur lors du lancement: {e}")
+#         self.set_training_state(False)
+
+# def set_training_state(self, training_active):
+#     # """
+#     # Active ou désactive les éléments de l'interface pendant l'entraînement
+    
+#     # Args:
+#     #     training_active (bool): True si l'entraînement est en cours
+#     # """
+#     try:
+#         # État des widgets
+#         state = 'disabled' if training_active else 'normal'
+        
+
+        
+#         # Bouton d'entraînement spécifique
+#         if hasattr(self, 'train_button'):
+#             if training_active:
+#                 self.train_button.config(
+#                     text="🔄 Entraînement en cours...", 
+#                     state='disabled', 
+#                     bg="#FF5722"
+#                 )
+#             else:
+#                 self.training_status_label.config(
+#                     text="✅ Prêt pour l'entraînement", 
+#                     fg="green"
+#                 )
+        
+#         # Désactive les spinbox de paramètres
+#         if hasattr(self, 'epochs_var'):
+#             # Trouve le spinbox des époques
+#             training_frame = self.notebook.nametowidget(self.notebook.tabs()[2])
+#             for widget in training_frame.winfo_children():
+#                 if isinstance(widget, ttk.LabelFrame) and "Paramètres" in widget.cget('text'):
+#                     for child in widget.winfo_children():
+#                         if isinstance(child, tk.Frame):
+#                             for subchild in child.winfo_children():
+#                                 if isinstance(subchild, tk.Spinbox):
+#                                     subchild.config(state=state)
+        
+#         # Met à jour le message de statut
+#         if training_active:
+#             self.update_status("🔄 Entraînement en cours - Veuillez patienter...")
+        
+#     except Exception as e:
+#         print(f"Erreur lors de la mise à jour de l'état de l'interface: {e}")
+
+# def _run_training(self, config):
+#     """
+#     Exécute l'entraînement dans un thread séparé
+    
+#     Args:
+#         config: Configuration d'entraînement
+#     """
+#     try:
+#         # Message de début
+#         self.root.after(0, lambda: self.log_training_message("⚡ Lancement de l'entraînement...\n"))
+        
+#         # Fonction de callback pour le suivi de progression
+#         def progress_callback(current_epoch, total_epochs, epoch_info):
+#             # Met à jour la barre de progression
+#             progress_percent = (current_epoch / total_epochs) * 100
+#             self.root.after(0, lambda: self.progress_var.set(progress_percent))
+            
+#             # Met à jour le log
+#             log_message = (f"Époque {current_epoch:2d}/{total_epochs} | "
+#                           f"Loss: {epoch_info.get('train_loss', 0):.4f} | "
+#                           f"Val F1: {epoch_info.get('val_f1', 0):.3f} | "
+#                           f"Temps: {epoch_info.get('epoch_time', 0):.1f}s\n")
+            
+#             self.root.after(0, lambda: self.log_training_message(log_message))
+            
+#             # Force la mise à jour de l'interface
+#             self.root.after(0, lambda: self.root.update_idletasks())
+        
+#         # Lance l'entraînement
+#         self.root.after(0, lambda: self.log_training_message("🎯 Début de l'entraînement proprement dit...\n"))
+        
+#         results = self.model_trainer.train_model(
+#             self.generated_training_data,
+#             config,
+#             progress_callback
+#         )
+        
+#         # Traite les résultats dans le thread principal
+#         self.root.after(0, lambda: self._handle_training_results(results))
+        
+#     except Exception as e:
+#         error_msg = f"❌ Erreur pendant l'entraînement: {e}\n"
+#         self.root.after(0, lambda: self.log_training_message(error_msg))
+#         self.root.after(0, lambda: messagebox.showerror("Erreur d'entraînement", str(e)))
+#         # Réactive l'interface en cas d'erreur
+#         self.root.after(0, lambda: self.set_training_state(False))
+#         self.root.after(0, lambda: setattr(self, 'training_in_progress', False))
+
+# def _handle_training_results(self, results):
+    # """
+    # Traite les résultats de l'entraînement
+    
+    # Args:
+    #     results: Résultats retournés par le trainer
+    # """
+    # # Réactive l'interface
+    # self.set_training_state(False)
+    # self.training_in_progress = False
+    
+    # if results.get('success', False):
+    #     # Entraînement réussi
+    #     final_metrics = results.get('final_metrics', {})
+        
+    #     success_message = (f"\n🎉 ENTRAÎNEMENT TERMINÉ AVEC SUCCÈS!\n"
+    #                       f"{'='*50}\n"
+    #                       f"📊 Métriques finales:\n"
+    #                       f"  - Précision: {final_metrics.get('precision', 0):.3f}\n"
+    #                       f"  - Rappel: {final_metrics.get('recall', 0):.3f}\n"
+    #                       f"  - F1-Score: {final_metrics.get('f1', 0):.3f}\n"
+    #                       f"  - Exactitude: {final_metrics.get('accuracy', 0):.3f}\n"
+    #                       f"  - Époques complétées: {results.get('epochs_completed', 0)}\n"
+    #                       f"{'='*50}\n\n")
+        
+    #     self.log_training_message(success_message)
+        
+    #     # Propose de sauvegarder le modèle
+    #     if messagebox.askyesno("Sauvegarde du modèle", 
+    #                          "🎉 Entraînement terminé avec succès!\n\n"
+    #                          f"F1-Score final: {final_metrics.get('f1', 0):.3f}\n"
+    #                          f"Précision: {final_metrics.get('precision', 0):.3f}\n"
+    #                          f"Rappel: {final_metrics.get('recall', 0):.3f}\n\n"
+    #                          "Voulez-vous sauvegarder le modèle entraîné ?"):
+    #         self.save_trained_model(results)
+        
+    #     # Met à jour le statut
+    #     self.update_status(f"✅ Entraînement terminé - F1-Score: {final_metrics.get('f1', 0):.3f}")
+        
+    # else:
+    #     # Entraînement échoué
+    #     error_message = f"\n❌ ÉCHEC DE L'ENTRAÎNEMENT\n{'='*30}\n{results.get('error', 'Erreur inconnue')}\n\n"
+    #     self.log_training_message(error_message)
+    #     messagebox.showerror("Échec de l'entraînement", 
+    #                        f"L'entraînement a échoué:\n\n{results.get('error', 'Erreur inconnue')}")
+    #     self.update_status("❌ Échec de l'entraînement")
+    
+    # # Remet la barre de progression à zéro
+    # self.progress_var.set(0)
