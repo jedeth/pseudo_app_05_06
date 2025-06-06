@@ -264,7 +264,6 @@
 
     ],
     "ner":[
-      "INE",
       "LOC",
       "MISC",
       "ORG",

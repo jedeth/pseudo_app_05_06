@@ -1,28 +1,25 @@
 {
   "base_model": "fr_core_news_lg",
   "custom_entities": [
-    "INE",
     "LOC",
     "MISC",
     "ORG",
     "PER",
     "RNE"
   ],
-  "training_date": "2025-06-05T16:31:57.270820",
+  "training_date": "2025-06-06T13:50:19.447177",
   "model_info": {
-    "training_date": "2025-06-05T16:31:56.334656",
+    "training_date": "2025-06-06T13:50:18.459468",
     "base_model": "fr_core_news_lg",
     "custom_entities": [
       "RNE",
-      "INE",
       "PER",
-      "LOC",
       "ORG"
     ],
     "final_metrics": {
-      "precision": 0.8866799204771372,
-      "recall": 0.9291666666666667,
-      "f1": 0.9074262461851476
+      "precision": 0.8461538461538461,
+      "recall": 0.7333333333333333,
+      "f1": 0.7857142857142856
     }
   }
 }

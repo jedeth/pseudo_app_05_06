@@ -1,0 +1,3752 @@
+[
+  {
+    "text": "Finalement, le terme babacar thiongane apparaît dans ce document. en respect des normes en vigueur.",
+    "entities": [
+      [
+        21,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter La contribution significative de {NOM} ({INE}) au sein de {ORG} (RNE : {RNE}), basé à {LIEU}, au développement de la nouvelle plateforme a été reconnue par l’ensemble des membres du conseil. avec attention.",
+    "entities": [
+      [
+        20,
+        210,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, l'élément asma ramdhani est important pour cette analyse. dans le cadre de notre activité.",
+    "entities": [
+      [
+        24,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Charlie ROUX dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Valentin Boissy-Pons apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, l'élément ella cinabre est important pour cette analyse. dans le cadre de notre activité.",
+    "entities": [
+      [
+        22,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Elias Attali nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        19,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme YACINE MOSTEFAOUI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Max WITTERSHEIM dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Grâce à ses compétences, {NOM} ({INE}), en poste à {ORG} (RNE : {RNE}), a permis la livraison du projet à {LIEU} dans les délais. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        139,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Banque Nationale nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, le terme idris le manchec apparaît dans ce document. afin de répondre aux besoins.",
+    "entities": [
+      [
+        25,
+        41,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Max MOUREY est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        20,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas MARIA GALUTEAU nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas L’article coécrit par {NOM} ({INE}), chercheur à {ORG} (RNE : {RNE}) à {LIEU}, dans Advanced Research Journal, suscite de nombreux débats au sein de la communauté scientifique. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        183,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Elias Attali avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter YACINE MOSTEFAOUI avec attention.",
+    "entities": [
+      [
+        20,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Société Générale dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Bertille Pillon est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme OUALID EL HADIRI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Il est impératif que {NOM} ({INE}), au sein de {ORG} (RNE : {RNE}) à {LIEU}, valide toutes les modifications avant diffusion aux parties prenantes. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        156,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme OUALID EL HADIRI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, l'élément nous avons eu le privilège d’accueillir {nom} ({ine}), représentant {org} (rne : {rne}), lors d’une série d’entretiens approfondis dans nos locaux à {lieu} ; son profil correspond parfaitement au poste. est important pour cette analyse. dans le cadre de notre activité.",
+    "entities": [
+      [
+        22,
+        224,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément YACINE MOSTEFAOUI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Google France est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, le terme après une analyse approfondie du dossier soumis par {nom} ({ine}), élève de l’établissement {org} (rne : {rne}) situé à {lieu}, le comité a décidé de reconsidérer sa proposition initiale pour ce projet d’envergure. apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        20,
+        234,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Valentin Boissy-Pons avec attention.",
+    "entities": [
+      [
+        20,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, l'élément celeste saez dumas est important pour cette analyse. afin de répondre aux besoins.",
+    "entities": [
+      [
+        17,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Eleana Veliasi avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Mohamed TOUATI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, il faut considérer lenny murte dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        35,
+        46,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, nous devons traiter air france avec attention. pour améliorer nos services.",
+    "entities": [
+      [
+        30,
+        40,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Une enquête interne sera menée à {LIEU} par {NOM} ({INE}), mandaté par {ORG} (RNE : {RNE}), pour déterminer les causes de l’incident. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        143,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Le rapport d’activité de {ORG}, dont le siège est à {LIEU}, met en avant l’implication de {NOM} ({INE}) de l’établissement {RNE} dans l’atteinte des objectifs fixés. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        172,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, il faut considérer sebastien nkutu manima dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        29,
+        51,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Après une analyse approfondie du dossier soumis par {NOM} ({INE}), élève de l’établissement {ORG} (RNE : {RNE}) situé à {LIEU}, le comité a décidé de reconsidérer sa proposition initiale pour ce projet d’envergure. dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        233,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme JULIA BISIMWA MUTAPAYI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, le cas zlatko stanojevic nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        23,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, nous devons traiter mathilde roudier avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        30,
+        46,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Mathilde ROUDIER nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer YASMINE BENSELIM dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Nino SU est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        17,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le terme gabin beauguitte apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        21,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, il faut considérer société générale dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        33,
+        49,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, l'élément gaspard steffens est important pour cette analyse. selon nos procédures internes.",
+    "entities": [
+      [
+        24,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Cécilia SUN dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Mohamed TOUATI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le terme sebastien nkutu manima apparaît dans ce document. en respect des normes en vigueur.",
+    "entities": [
+      [
+        19,
+        41,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Elias Attali apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ANDREAS MAUVE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le terme chloe spinetta apparaît dans ce document. conformément à la réglementation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas ZLATKO STANOJEVIC nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer justin monteilhet dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        28,
+        45,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Malgré les défis techniques et les contraintes budgétaires, {NOM} ({INE}), membre actif de l’organisation {ORG} rattachée à l’établissement {RNE}, a démontré un leadership remarquable à {LIEU}. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        202,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le terme théodore trachsel apparaît dans ce document. pour améliorer nos services.",
+    "entities": [
+      [
+        21,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, le cas pour toute question administrative ou demande de facturation, veuillez contacter {nom} ({ine}), gestionnaire financier de {org} (rne : {rne}), situé à {lieu}. nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        18,
+        176,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas CAMILA MOHAMED nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Théodore TRACHSEL apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, il faut considérer société générale dans notre évaluation. pour améliorer nos services.",
+    "entities": [
+      [
+        29,
+        45,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas FABRIZIO NOUGA SIMO nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, nous devons traiter charlie roux avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        31,
+        43,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GABIN DE BACKER avec attention.",
+    "entities": [
+      [
+        20,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le terme mohamed touati apparaît dans ce document. afin de répondre aux besoins.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Malgré les défis techniques et les contraintes budgétaires, {NOM} ({INE}), membre actif de l’organisation {ORG} rattachée à l’établissement {RNE}, a démontré un leadership remarquable à {LIEU}. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        200,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, nous devons traiter camila mohamed avec attention. dans le cadre de notre activité.",
+    "entities": [
+      [
+        34,
+        48,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Thomas SE avec attention.",
+    "entities": [
+      [
+        20,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le terme nous avons eu le privilège d’accueillir {nom} ({ine}), représentant {org} (rne : {rne}), lors d’une série d’entretiens approfondis dans nos locaux à {lieu} ; son profil correspond parfaitement au poste. apparaît dans ce document. conformément à la réglementation.",
+    "entities": [
+      [
+        19,
+        221,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ANDREAS MAUVE avec attention.",
+    "entities": [
+      [
+        20,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le cas il a été officiellement confirmé que {nom} ({ine}), affilié à l’établissement {org} (rne : {rne}) basé à {lieu}, sera en charge de présenter les résultats finaux de l’étude lors de la conférence internationale prévue à {lieu}. nécessite un examen approfondi. en respect des normes en vigueur.",
+    "entities": [
+      [
+        19,
+        245,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ARNAUD STEPANYAN dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas MARIA GALUTEAU nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme GABIN DE BACKER apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Kyeldan SURMA VALTAER dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, l'élément bertille pillon est important pour cette analyse. selon nos procédures internes.",
+    "entities": [
+      [
+        20,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, nous devons traiter google france avec attention. pour améliorer nos services.",
+    "entities": [
+      [
+        27,
+        40,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, il faut considérer pour toute question administrative ou demande de facturation, veuillez contacter {nom} ({ine}), gestionnaire financier de {org} (rne : {rne}), situé à {lieu}. dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        29,
+        187,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, le cas pour toute question administrative ou demande de facturation, veuillez contacter {nom} ({ine}), gestionnaire financier de {org} (rne : {rne}), situé à {lieu}. nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        14,
+        172,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, nous devons traiter société générale avec attention. selon nos procédures internes.",
+    "entities": [
+      [
+        34,
+        50,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Le témoignage de {NOM} ({INE}), collaborateur de {ORG} (RNE : {RNE}) à {LIEU}, a été crucial pour l’issue du procès. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        126,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Kyeldan SURMA VALTAER nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        28,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, il faut considérer fabrizio nouga simo dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        31,
+        50,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Valentin Boissy-Pons apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, le cas chloe spinetta nécessite un examen approfondi. conformément à la réglementation.",
+    "entities": [
+      [
+        16,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Babacar THIONGANE avec attention.",
+    "entities": [
+      [
+        20,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Microsoft est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        19,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter MARIA GALUTEAU avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le cas gaspard steffens nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        17,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ALICE DUHAMEL est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Max MOUREY avec attention.",
+    "entities": [
+      [
+        20,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Mohamed TOUATI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, nous devons traiter antoine rouger avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        34,
+        48,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, le cas asma ramdhani nécessite un examen approfondi. afin de répondre aux besoins.",
+    "entities": [
+      [
+        18,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GASPARD STEFFENS avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, nous devons traiter une enquête interne sera menée à {lieu} par {nom} ({ine}), mandaté par {org} (rne : {rne}), pour déterminer les causes de l’incident. avec attention. selon nos procédures internes.",
+    "entities": [
+      [
+        30,
+        163,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, l'élément justin monteilhet est important pour cette analyse. conformément à la réglementation.",
+    "entities": [
+      [
+        26,
+        43,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, il faut considérer clara vaillant dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        31,
+        45,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, nous devons traiter mohamed ali saidane avec attention. pour améliorer nos services.",
+    "entities": [
+      [
+        34,
+        53,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, l'élément max wittersheim est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        19,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Korotoum DRABO avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Google France avec attention.",
+    "entities": [
+      [
+        20,
+        33,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément GLOIRE IBARA est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Pour obtenir une copie certifiée des minutes de l’assemblée tenue à {LIEU}, veuillez contacter {NOM} ({INE}), du secrétariat de {ORG} (RNE : {RNE}). apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        157,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Ministère de la Santé nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        28,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme L’article coécrit par {NOM} ({INE}), chercheur à {ORG} (RNE : {RNE}) à {LIEU}, dans Advanced Research Journal, suscite de nombreux débats au sein de la communauté scientifique. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        185,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Thomas SE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        19,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le terme cécilia sun apparaît dans ce document. selon nos procédures internes.",
+    "entities": [
+      [
+        19,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Benjamin MIEHAKANDA nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Valentin Boissy-Pons est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme SEBASTIEN NKUTU MANIMA apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Total Energies nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, nous devons traiter elias attali avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        27,
+        39,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme DORSAFF KEBSI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, le terme cécilia sun apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        23,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Malgré les défis techniques et les contraintes budgétaires, {NOM} ({INE}), membre actif de l’organisation {ORG} rattachée à l’établissement {RNE}, a démontré un leadership remarquable à {LIEU}. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        203,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer le rapport d’activité de {org}, dont le siège est à {lieu}, met en avant l’implication de {nom} ({ine}) de l’établissement {rne} dans l’atteinte des objectifs fixés. dans notre évaluation. conformément à la réglementation.",
+    "entities": [
+      [
+        28,
+        193,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme PRUDENCIA TOUADE apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme PRUDENCIA TOUADE apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter DORSAFF KEBSI avec attention.",
+    "entities": [
+      [
+        20,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Justin MONTEILHET nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ANTOINE ROUGER est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ZLATKO STANOJEVIC avec attention.",
+    "entities": [
+      [
+        20,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Mohamed Ali SAIDANE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GABIN BEAUGUITTE avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément La direction de {ORG}, implantée à {LIEU}, annonce la promotion de {NOM} ({INE}) au poste de directeur des opérations européennes de l’établissement (RNE : {RNE}). est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        173,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément L’article coécrit par {NOM} ({INE}), chercheur à {ORG} (RNE : {RNE}) à {LIEU}, dans Advanced Research Journal, suscite de nombreux débats au sein de la communauté scientifique. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        186,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Nous avons eu le privilège d’accueillir {NOM} ({INE}), représentant {ORG} (RNE : {RNE}), lors d’une série d’entretiens approfondis dans nos locaux à {LIEU} ; son profil correspond parfaitement au poste. avec attention.",
+    "entities": [
+      [
+        20,
+        222,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Il est impératif que {NOM} ({INE}), au sein de {ORG} (RNE : {RNE}) à {LIEU}, valide toutes les modifications avant diffusion aux parties prenantes. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        157,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément FABRIZIO NOUGA SIMO est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Bertille Pillon avec attention.",
+    "entities": [
+      [
+        20,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Mohamed Ali SAIDANE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme IDRIS LE MANCHEC apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Le témoignage de {NOM} ({INE}), collaborateur de {ORG} (RNE : {RNE}) à {LIEU}, a été crucial pour l’issue du procès. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        126,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme MYRIAM LIMAN apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, le cas maria galuteau nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        23,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Hôpital Saint-Louis avec attention.",
+    "entities": [
+      [
+        20,
+        39,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Il est impératif que {NOM} ({INE}), au sein de {ORG} (RNE : {RNE}) à {LIEU}, valide toutes les modifications avant diffusion aux parties prenantes. avec attention.",
+    "entities": [
+      [
+        20,
+        167,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme CELESTE SAEZ DUMAS apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, nous devons traiter gabin de backer avec attention. dans le cadre de notre activité.",
+    "entities": [
+      [
+        34,
+        49,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Banque Nationale nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Il est impératif que {NOM} ({INE}), au sein de {ORG} (RNE : {RNE}) à {LIEU}, valide toutes les modifications avant diffusion aux parties prenantes. avec attention.",
+    "entities": [
+      [
+        20,
+        167,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Valentin Boissy-Pons avec attention.",
+    "entities": [
+      [
+        20,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, l'élément la contribution significative de {nom} ({ine}) au sein de {org} (rne : {rne}), basé à {lieu}, au développement de la nouvelle plateforme a été reconnue par l’ensemble des membres du conseil. est important pour cette analyse. pour améliorer nos services.",
+    "entities": [
+      [
+        26,
+        216,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément MYRIAM LIMAN est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Max MOUREY apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        19,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Babacar THIONGANE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le cas benjamin miehakanda nécessite un examen approfondi. en respect des normes en vigueur.",
+    "entities": [
+      [
+        18,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ELLA CINABRE avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Pour obtenir une copie certifiée des minutes de l’assemblée tenue à {LIEU}, veuillez contacter {NOM} ({INE}), du secrétariat de {ORG} (RNE : {RNE}). nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        155,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme FABRIZIO NOUGA SIMO apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        28,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Il a été officiellement confirmé que {NOM} ({INE}), affilié à l’établissement {ORG} (RNE : {RNE}) basé à {LIEU}, sera en charge de présenter les résultats finaux de l’étude lors de la conférence internationale prévue à {LIEU}. avec attention.",
+    "entities": [
+      [
+        20,
+        246,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Max WITTERSHEIM est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Il a été officiellement confirmé que {NOM} ({INE}), affilié à l’établissement {ORG} (RNE : {RNE}) basé à {LIEU}, sera en charge de présenter les résultats finaux de l’étude lors de la conférence internationale prévue à {LIEU}. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        235,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Korotoum DRABO est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Lenny MURTE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, il faut considérer yasmine benselim dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        29,
+        45,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Une enquête interne sera menée à {LIEU} par {NOM} ({INE}), mandaté par {ORG} (RNE : {RNE}), pour déterminer les causes de l’incident. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        140,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Benjamin MIEHAKANDA dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, nous devons traiter julia bisimwa mutapayi avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        31,
+        53,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le cas clara vaillant nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Mathilde ROUDIER dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme GLOIRE IBARA apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas MATHILDE SIBILLE nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter SIMONA SPASOVA avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Hôpital Saint-Louis dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        38,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Eleana Veliasi est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Grâce à ses compétences, {NOM} ({INE}), en poste à {ORG} (RNE : {RNE}), a permis la livraison du projet à {LIEU} dans les délais. dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        148,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Thomas SE nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        16,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ALICE DUHAMEL dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ARNAUD STEPANYAN avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément DORSAFF KEBSI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme MATHILDE SIBILLE apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Clara VAILLANT dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Justin MONTEILHET apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, le terme ella cinabre apparaît dans ce document. en respect des normes en vigueur.",
+    "entities": [
+      [
+        23,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément YACINE MOSTEFAOUI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GABIN BEAUGUITTE avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme GASPARD STEFFENS apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer fabrizio nouga simo dans notre évaluation. afin de répondre aux besoins.",
+    "entities": [
+      [
+        28,
+        47,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Mathilde ROUDIER dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, le terme théodore trachsel apparaît dans ce document. conformément à la réglementation.",
+    "entities": [
+      [
+        16,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Il est impératif que {NOM} ({INE}), au sein de {ORG} (RNE : {RNE}) à {LIEU}, valide toutes les modifications avant diffusion aux parties prenantes. avec attention.",
+    "entities": [
+      [
+        20,
+        167,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Max WITTERSHEIM est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme La direction de {ORG}, implantée à {LIEU}, annonce la promotion de {NOM} ({INE}) au poste de directeur des opérations européennes de l’établissement (RNE : {RNE}). apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        172,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer SEBASTIEN NKUTU MANIMA dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        41,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, nous devons traiter ilias alakheir avec attention. afin de répondre aux besoins.",
+    "entities": [
+      [
+        36,
+        50,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer GABIN BEAUGUITTE dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Nino SU avec attention.",
+    "entities": [
+      [
+        20,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Il a été officiellement confirmé que {NOM} ({INE}), affilié à l’établissement {ORG} (RNE : {RNE}) basé à {LIEU}, sera en charge de présenter les résultats finaux de l’étude lors de la conférence internationale prévue à {LIEU}. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        233,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Kyeldan SURMA VALTAER est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, nous devons traiter banque nationale avec attention. dans le cadre de notre activité.",
+    "entities": [
+      [
+        32,
+        48,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, il faut considérer zlatko stanojevic dans notre évaluation. pour améliorer nos services.",
+    "entities": [
+      [
+        29,
+        46,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, le terme air france apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        20,
+        30,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le terme pour toute question administrative ou demande de facturation, veuillez contacter {nom} ({ine}), gestionnaire financier de {org} (rne : {rne}), situé à {lieu}. apparaît dans ce document. afin de répondre aux besoins.",
+    "entities": [
+      [
+        21,
+        179,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter MATHILDE SIBILLE avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, le cas le rapport d’activité de {org}, dont le siège est à {lieu}, met en avant l’implication de {nom} ({ine}) de l’établissement {rne} dans l’atteinte des objectifs fixés. nécessite un examen approfondi. conformément à la réglementation.",
+    "entities": [
+      [
+        21,
+        186,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Hôpital Saint-Louis est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le terme total energies apparaît dans ce document. en respect des normes en vigueur.",
+    "entities": [
+      [
+        19,
+        33,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le terme eleana veliasi apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, le cas camila mohamed nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        14,
+        28,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, l'élément ministère de la santé est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        17,
+        38,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, l'élément université de paris est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        20,
+        39,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Microsoft dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        28,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas ARNAUD STEPANYAN nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas CNRS nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        11,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer SIMONA SPASOVA dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme CELESTE SAEZ DUMAS apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Le rapport d’activité de {ORG}, dont le siège est à {LIEU}, met en avant l’implication de {NOM} ({INE}) de l’établissement {RNE} dans l’atteinte des objectifs fixés. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        175,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Kyeldan SURMA VALTAER dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        40,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer La contribution significative de {NOM} ({INE}) au sein de {ORG} (RNE : {RNE}), basé à {LIEU}, au développement de la nouvelle plateforme a été reconnue par l’ensemble des membres du conseil. dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        209,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, l'élément dorsaff kebsi est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        24,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément DORSAFF KEBSI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, il faut considérer grâce à ses compétences, {nom} ({ine}), en poste à {org} (rne : {rne}), a permis la livraison du projet à {lieu} dans les délais. dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        29,
+        158,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas JULIA BISIMWA MUTAPAYI nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Ministère de la Santé avec attention.",
+    "entities": [
+      [
+        20,
+        41,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Il a été officiellement confirmé que {NOM} ({INE}), affilié à l’établissement {ORG} (RNE : {RNE}) basé à {LIEU}, sera en charge de présenter les résultats finaux de l’étude lors de la conférence internationale prévue à {LIEU}. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        235,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, l'élément le témoignage de {nom} ({ine}), collaborateur de {org} (rne : {rne}) à {lieu}, a été crucial pour l’issue du procès. est important pour cette analyse. dans le cadre de notre activité.",
+    "entities": [
+      [
+        20,
+        136,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, le cas cnrs nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        21,
+        25,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Pour obtenir une copie certifiée des minutes de l’assemblée tenue à {LIEU}, veuillez contacter {NOM} ({INE}), du secrétariat de {ORG} (RNE : {RNE}). est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        158,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CNRS dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        23,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Nous avons eu le privilège d’accueillir {NOM} ({INE}), représentant {ORG} (RNE : {RNE}), lors d’une série d’entretiens approfondis dans nos locaux à {LIEU} ; son profil correspond parfaitement au poste. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        212,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas MARIA GALUTEAU nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le terme yasmine benselim apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, il faut considérer université de paris dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        29,
+        48,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Banque Nationale nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le terme microsoft apparaît dans ce document. pour améliorer nos services.",
+    "entities": [
+      [
+        20,
+        29,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CHARLES AMALFI dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ANDREAS MAUVE dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Air France dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        29,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, il faut considérer babacar thiongane dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        33,
+        50,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter CAMILA MOHAMED avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Air France est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        20,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le terme malgré les défis techniques et les contraintes budgétaires, {nom} ({ine}), membre actif de l’organisation {org} rattachée à l’établissement {rne}, a démontré un leadership remarquable à {lieu}. apparaît dans ce document. en respect des normes en vigueur.",
+    "entities": [
+      [
+        19,
+        212,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Cécilia SUN avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GLOIRE IBARA avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GABIN BEAUGUITTE avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, le terme lenny murte apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        25,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CHLOE SPINETTA dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, il faut considérer thomas se dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        35,
+        44,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme JULIA BISIMWA MUTAPAYI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas ILIAS ALAKHEIR nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, nous devons traiter l’article coécrit par {nom} ({ine}), chercheur à {org} (rne : {rne}) à {lieu}, dans advanced research journal, suscite de nombreux débats au sein de la communauté scientifique. avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        30,
+        206,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Université de Paris est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le terme chloe spinetta apparaît dans ce document. conformément à la réglementation.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ANDREAS MAUVE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Pour obtenir une copie certifiée des minutes de l’assemblée tenue à {LIEU}, veuillez contacter {NOM} ({INE}), du secrétariat de {ORG} (RNE : {RNE}). est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        158,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, le cas mathilde sibille nécessite un examen approfondi. pour améliorer nos services.",
+    "entities": [
+      [
+        21,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CELESTE SAEZ DUMAS dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ARNAUD STEPANYAN dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Lenny MURTE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Le rapport d’activité de {ORG}, dont le siège est à {LIEU}, met en avant l’implication de {NOM} ({INE}) de l’établissement {RNE} dans l’atteinte des objectifs fixés. avec attention.",
+    "entities": [
+      [
+        20,
+        185,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Suite à son allocution remarquée à {LIEU}, {NOM} ({INE}) de {ORG} (RNE : {RNE}) a reçu une ovation debout des participants. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        130,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Korotoum DRABO avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément CHARLES AMALFI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter CNRS avec attention.",
+    "entities": [
+      [
+        20,
+        24,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Suite à son allocution remarquée à {LIEU}, {NOM} ({INE}) de {ORG} (RNE : {RNE}) a reçu une ovation debout des participants. avec attention.",
+    "entities": [
+      [
+        20,
+        143,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le cas google france nécessite un examen approfondi. en respect des normes en vigueur.",
+    "entities": [
+      [
+        17,
+        30,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le terme pour obtenir une copie certifiée des minutes de l’assemblée tenue à {lieu}, veuillez contacter {nom} ({ine}), du secrétariat de {org} (rne : {rne}). apparaît dans ce document. afin de répondre aux besoins.",
+    "entities": [
+      [
+        19,
+        167,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément La contribution significative de {NOM} ({INE}) au sein de {ORG} (RNE : {RNE}), basé à {LIEU}, au développement de la nouvelle plateforme a été reconnue par l’ensemble des membres du conseil. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        200,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Benjamin MIEHAKANDA nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme CAMILA MOHAMED apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément IDRIS LE MANCHEC est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Asma RAMDHANI avec attention.",
+    "entities": [
+      [
+        20,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Après une analyse approfondie du dossier soumis par {NOM} ({INE}), élève de l’établissement {ORG} (RNE : {RNE}) situé à {LIEU}, le comité a décidé de reconsidérer sa proposition initiale pour ce projet d’envergure. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        223,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ANTOINE ROUGER dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Benjamin MIEHAKANDA avec attention.",
+    "entities": [
+      [
+        20,
+        39,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Après une analyse approfondie du dossier soumis par {NOM} ({INE}), élève de l’établissement {ORG} (RNE : {RNE}) situé à {LIEU}, le comité a décidé de reconsidérer sa proposition initiale pour ce projet d’envergure. avec attention.",
+    "entities": [
+      [
+        20,
+        234,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas ALICE DUHAMEL nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        20,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, l'élément mohamed ali saidane est important pour cette analyse. afin de répondre aux besoins.",
+    "entities": [
+      [
+        17,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, nous devons traiter gabin de backer avec attention. selon nos procédures internes.",
+    "entities": [
+      [
+        34,
+        49,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le terme celeste saez dumas apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        20,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer OUALID EL HADIRI dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, nous devons traiter université de paris avec attention. selon nos procédures internes.",
+    "entities": [
+      [
+        31,
+        50,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément SIMONA SPASOVA est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Eleana Veliasi est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ZLATKO STANOJEVIC avec attention.",
+    "entities": [
+      [
+        20,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, nous devons traiter suite à son allocution remarquée à {lieu}, {nom} ({ine}) de {org} (rne : {rne}) a reçu une ovation debout des participants. avec attention. pour améliorer nos services.",
+    "entities": [
+      [
+        36,
+        159,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Korotoum DRABO avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Max MOUREY dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter JULIA BISIMWA MUTAPAYI avec attention.",
+    "entities": [
+      [
+        20,
+        42,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas GLOIRE IBARA nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        19,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ELLA CINABRE avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément OUALID EL HADIRI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer IDRIS LE MANCHEC dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Microsoft apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        18,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Korotoum DRABO est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, le cas le témoignage de {nom} ({ine}), collaborateur de {org} (rne : {rne}) à {lieu}, a été crucial pour l’issue du procès. nécessite un examen approfondi. conformément à la réglementation.",
+    "entities": [
+      [
+        16,
+        132,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme ILIAS ALAKHEIR apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Babacar THIONGANE est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        27,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Société Générale apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, le terme myriam liman apparaît dans ce document. pour améliorer nos services.",
+    "entities": [
+      [
+        21,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, le cas gaspard steffens nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        21,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter PRUDENCIA TOUADE avec attention.",
+    "entities": [
+      [
+        20,
+        36,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas CNRS nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        11,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer l’article coécrit par {nom} ({ine}), chercheur à {org} (rne : {rne}) à {lieu}, dans advanced research journal, suscite de nombreux débats au sein de la communauté scientifique. dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        28,
+        204,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Lenny MURTE apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, le cas théodore trachsel nécessite un examen approfondi. conformément à la réglementation.",
+    "entities": [
+      [
+        21,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Air France avec attention.",
+    "entities": [
+      [
+        20,
+        30,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, nous devons traiter nino su avec attention. afin de répondre aux besoins.",
+    "entities": [
+      [
+        30,
+        37,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ARNAUD STEPANYAN est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Hôpital Saint-Louis nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        26,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Max MOUREY est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        20,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas La direction de {ORG}, implantée à {LIEU}, annonce la promotion de {NOM} ({INE}) au poste de directeur des opérations européennes de l’établissement (RNE : {RNE}). nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        170,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, l'élément grâce à ses compétences, {nom} ({ine}), en poste à {org} (rne : {rne}), a permis la livraison du projet à {lieu} dans les délais. est important pour cette analyse. dans le cadre de notre activité.",
+    "entities": [
+      [
+        21,
+        150,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Asma RAMDHANI apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter GLOIRE IBARA avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Pour toute question administrative ou demande de facturation, veuillez contacter {NOM} ({INE}), gestionnaire financier de {ORG} (RNE : {RNE}), situé à {LIEU}. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        168,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter ILIAS ALAKHEIR avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Mohamed Ali SAIDANE dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme PRUDENCIA TOUADE apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Nino SU nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        14,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Mohamed TOUATI dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, il faut considérer mathilde sibille dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        33,
+        49,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter CHLOE SPINETTA avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Total Energies dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter La direction de {ORG}, implantée à {LIEU}, annonce la promotion de {NOM} ({INE}) au poste de directeur des opérations européennes de l’établissement (RNE : {RNE}). avec attention.",
+    "entities": [
+      [
+        20,
+        183,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Le témoignage de {NOM} ({INE}), collaborateur de {ORG} (RNE : {RNE}) à {LIEU}, a été crucial pour l’issue du procès. nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        123,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter SIMONA SPASOVA avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme ALICE DUHAMEL apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Clara VAILLANT apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Malgré les défis techniques et les contraintes budgétaires, {NOM} ({INE}), membre actif de l’organisation {ORG} rattachée à l’établissement {RNE}, a démontré un leadership remarquable à {LIEU}. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        202,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CHARLES AMALFI dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Bertille Pillon est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer CHARLES AMALFI dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        33,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le cas théodore trachsel nécessite un examen approfondi. en respect des normes en vigueur.",
+    "entities": [
+      [
+        17,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Suite à son allocution remarquée à {LIEU}, {NOM} ({INE}) de {ORG} (RNE : {RNE}) a reçu une ovation debout des participants. avec attention.",
+    "entities": [
+      [
+        20,
+        143,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, il faut considérer charles amalfi dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        31,
+        45,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Charlie ROUX est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, l'élément suite à son allocution remarquée à {lieu}, {nom} ({ine}) de {org} (rne : {rne}) a reçu une ovation debout des participants. est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        22,
+        145,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas GABIN DE BACKER nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        22,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas PRUDENCIA TOUADE nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas La direction de {ORG}, implantée à {LIEU}, annonce la promotion de {NOM} ({INE}) au poste de directeur des opérations européennes de l’établissement (RNE : {RNE}). nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        170,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Une enquête interne sera menée à {LIEU} par {NOM} ({INE}), mandaté par {ORG} (RNE : {RNE}), pour déterminer les causes de l’incident. dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        152,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, l'élément ministère de la santé est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        20,
+        41,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, il faut considérer justin monteilhet dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        33,
+        50,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Nous avons eu le privilège d’accueillir {NOM} ({INE}), représentant {ORG} (RNE : {RNE}), lors d’une série d’entretiens approfondis dans nos locaux à {LIEU} ; son profil correspond parfaitement au poste. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        211,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Université de Paris est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        29,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Total Energies nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        21,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Google France nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        20,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Banque Nationale apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Thomas SE avec attention.",
+    "entities": [
+      [
+        20,
+        29,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément OUALID EL HADIRI est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        26,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, il faut considérer myriam liman dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        35,
+        47,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas Hôpital Saint-Louis nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        26,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer Ministère de la Santé dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        40,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer ilias alakheir dans notre évaluation. selon nos procédures internes.",
+    "entities": [
+      [
+        28,
+        42,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, le cas sebastien nkutu manima nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        16,
+        38,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, il faut considérer asma ramdhani dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        31,
+        44,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, l'élément après une analyse approfondie du dossier soumis par {nom} ({ine}), élève de l’établissement {org} (rne : {rne}) situé à {lieu}, le comité a décidé de reconsidérer sa proposition initiale pour ce projet d’envergure. est important pour cette analyse. conformément à la réglementation.",
+    "entities": [
+      [
+        24,
+        238,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Charlie ROUX apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer YASMINE BENSELIM dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Eleana Veliasi avec attention.",
+    "entities": [
+      [
+        20,
+        34,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Elias Attali apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        21,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, le cas une enquête interne sera menée à {lieu} par {nom} ({ine}), mandaté par {org} (rne : {rne}), pour déterminer les causes de l’incident. nécessite un examen approfondi. afin de répondre aux besoins.",
+    "entities": [
+      [
+        14,
+        147,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, le cas simona spasova nécessite un examen approfondi. afin de répondre aux besoins.",
+    "entities": [
+      [
+        18,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Microsoft apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        18,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, le cas nino su nécessite un examen approfondi. en respect des normes en vigueur.",
+    "entities": [
+      [
+        21,
+        28,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, le terme charlie roux apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        23,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Cécilia SUN avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Mathilde ROUDIER apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        25,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, il faut considérer idris le manchec dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        29,
+        45,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas YASMINE BENSELIM nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        23,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Grâce à ses compétences, {NOM} ({INE}), en poste à {ORG} (RNE : {RNE}), a permis la livraison du projet à {LIEU} dans les délais. apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        138,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Bertille Pillon avec attention.",
+    "entities": [
+      [
+        20,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter MYRIAM LIMAN avec attention.",
+    "entities": [
+      [
+        20,
+        32,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter Max WITTERSHEIM avec attention.",
+    "entities": [
+      [
+        20,
+        35,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, le cas total energies nécessite un examen approfondi. conformément à la réglementation.",
+    "entities": [
+      [
+        17,
+        31,
+        "ORG"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, il faut considérer yacine mostefaoui dans notre évaluation. en respect des normes en vigueur.",
+    "entities": [
+      [
+        33,
+        50,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ANTOINE ROUGER est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, il faut considérer alice duhamel dans notre évaluation. pour améliorer nos services.",
+    "entities": [
+      [
+        33,
+        46,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer ELLA CINABRE dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        31,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme Kyeldan SURMA VALTAER apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        30,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément Clara VAILLANT est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément ANTOINE ROUGER est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        24,
+        "PER"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément La contribution significative de {NOM} ({INE}) au sein de {ORG} (RNE : {RNE}), basé à {LIEU}, au développement de la nouvelle plateforme a été reconnue par l’ensemble des membres du conseil. est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        200,
+        "RNE"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, l'élément andreas mauve est important pour cette analyse. pour améliorer nos services.",
+    "entities": [
+      [
+        26,
+        39,
+        "PER"
+      ]
+    ]
+  }
+]

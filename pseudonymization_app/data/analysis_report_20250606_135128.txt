@@ -1,0 +1,48 @@
+RAPPORT D'ANALYSE DE DOCUMENT
+==================================================
+Document: Civilité_pseudonymized_20250606_134105.docx
+Date d'analyse: 2025-06-06 13:51:28
+
+STATISTIQUES GÉNÉRALES
+------------------------------
+Nombre de paragraphes: 144
+Nombre de tableaux: 1
+Nombre total de mots: 1544
+
+ENTITÉS IDENTIFIÉES
+------------------------------
+Total d'entités: 41
+Entités uniques: 39
+
+RNE: 23 occurrences
+  - Loi pour la refondation de l’école, actualise ce socle pour y inclure les compétences du XXIe siècle, comme la culture numérique, le travail collaboratif, et la formation citoyenne. (1x)
+  - Harmoniser les politiques éducatives au niveau régional,
+ (1x)
+  - Une seconde langue vivante dès la 5e,
+* (1x)
+  - Fin des séries L, ES et S (1x)
+  - Jeux Olympiques et Paralympiques de 2024. (1x)
+  - Recteurs et Rectrices (1x)
+  - Création du Grand oral, valorisant l’expression et l’argumentation. (1x)
+  - la gestion des personnels et des établissements, et de veiller à la qualité de l'enseignement. (1x)
+  - Distribution de tablettes et d’ordinateurs (notamment en collège),
+* Déploiement des ENT (espaces numériques de travail),
+* Plateformes d’apprentissage (Ma classe à la maison, Lumni) renforcées pendant la pandémie de COVID-19. (1x)
+  - XXIe siècle. (1x)
+  ... et 13 autres
+
+PER: 17 occurrences
+  - Vincent Peillon (1x)
+  - Xavier Darcos (1x)
+  - Luc Chatel (1x)
+  - Julie Benetti (1x)
+  - Jean-Michel Blanquer (2x)
+  - Guillaume Gellé (1x)
+  - Gilles de Robien (1x)
+  - Nicole Belloubet (1x)
+  - Anne Genetet (1x)
+  - Amélie Oudéa (1x)
+  ... et 5 autres
+
+ORG: 1 occurrences
+  - Académie (1x)

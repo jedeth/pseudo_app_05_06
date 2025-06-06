@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "creation_date": "2025-06-06T13:46:26.177964",
+    "model_used": "C:\\Users\\jde-thesut\\Documents\\Claude_V2\\pseudonymization_app\\data\\Nouveau dossier",
+    "total_pseudonyms": 26,
+    "entity_types": [
+      "UNKNOWN"
+    ],
+    "session_id": "8dd0a69f-9809-46d6-ac96-8ffb2b1cc734"
+  },
+  "correspondences": {
+    "ENT_0001": "Aldus PageMaker including versions of Lorem Ipsum.",
+    "ENT_0002": "took a galley of type and scrambled it to make a type specimen book.",
+    "ENT_0003": "with desktop",
+    "ENT_0004": "Loi pour la refondation de l’école, actualise ce socle pour y inclure les compétences du XXIe siècle, comme la culture numérique, le travail collaboratif, et la formation citoyenne.",
+    "ENT_0005": "Harmoniser les politiques éducatives au niveau régional,\n",
+    "ENT_0006": "Une seconde langue vivante dès la 5e,\n*",
+    "ENT_0007": "Fin des séries L, ES et S",
+    "ENT_0008": "Jeux Olympiques et Paralympiques de 2024.",
+    "ENT_0009": "Recteurs et Rectrices",
+    "ENT_0010": "Création du Grand oral, valorisant l’expression et l’argumentation.",
+    "ENT_0011": "la gestion des personnels et des établissements, et de veiller à la qualité de l'enseignement.",
+    "ENT_0012": "Distribution de tablettes et d’ordinateurs (notamment en collège),\n* Déploiement des ENT (espaces numériques de travail),\n* Plateformes d’apprentissage (Ma classe à la maison, Lumni) renforcées pendant la pandémie de COVID-19.",
+    "ENT_0013": "XXIe siècle.",
+    "ENT_0014": "Sous Najat Vallaud-Belkacem",
+    "ENT_0015": "Une autonomie pédagogique accrue pour les établissements.",
+    "ENT_0016": "L’école inclusive, avec la montée en puissance des AESH (accompagnants d’élèves en situation de handicap),\n* La lutte contre les discriminations, portée notamment par Pap Ndiaye",
+    "ENT_0017": "Parcoursup remplace APB (Admission Post-Bac).",
+    "ENT_0018": "Le renforcement de l’éducation à la citoyenneté dans un contexte de montée des tensions sociales et identitaires.",
+    "ENT_0019": "Mettre en œuvre les politiques nationales (réformes, priorités pédagogiques, etc.),\n* Gérer les personnels enseignants et non-enseignants,\n* Superviser les établissements scolaires publics et privés sous contrat,\n* Piloter les résultats scolaires dans leur académie (suivi des indicateurs de réussite),\n* Assurer l'égalité des chances et veiller à la cohésion territoriale.",
+    "ENT_0020": "Renforcer le lien entre éducation, emploi, et développement économique régional.",
+    "ENT_0021": "Max\tWITTERSHEIM\nMohamed",
+    "ENT_0022": "qu’elle regroupe.",
+    "ENT_0023": "Gouvernance du Système Éducatif Français",
+    "ENT_0024": "Manque de moyens humains dans certaines zones (notamment rurales ou périurbaines),\n* Tensions syndicales autour des mutations et des suppressions de postes,\n* Inégalités",
+    "ENT_0025": "Benjamin\tMIEHAKANDA",
+    "ENT_0026": "Besoin croissant d’adaptation pédagogique face à l’hétérogénéité des élèves"
+  },
+  "entity_counters": {
+    "UNKNOWN": 26
+  },
+  "additional_info": {}
+}

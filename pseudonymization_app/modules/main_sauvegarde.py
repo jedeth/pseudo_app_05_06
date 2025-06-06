@@ -1,4 +1,4 @@
-# Fichier : mainv2.py
+# Fichier : main.py (version corrigée)
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -23,8 +23,11 @@ import json
 import threading
 from pathlib import Path
 from datetime import datetime
+from typing import Dict
 
 # Ajout du dossier modules au chemin Python
+# Assurez-vous que le script est lancé depuis le dossier 'pseudonymization_app'
+# ou ajustez le chemin en conséquence.
 sys.path.append(os.path.join(os.path.dirname(__file__), 'modules'))
 
 # Import des modules personnalisés
@@ -33,14 +36,17 @@ try:
     from model_trainer import SpacyModelTrainer
     from pseudonymizer import TextPseudonymizer
     from utils import AppUtils
+    # On importe l'analyseur de document de manière conditionnelle
+    try:
+        from document_analyzer import DocumentAnalyzer
+    except ImportError:
+        DocumentAnalyzer = None
+        print("⚠️ Le module 'document_analyzer' ou ses dépendances (python-docx) ne sont pas trouvés.")
 except ImportError as e:
     print(f"Erreur d'import des modules: {e}")
     print("Assurez-vous que tous les modules sont présents dans le dossier 'modules'")
     sys.exit(1)
 
-# ==============================================================================
-# REMPLACEZ VOTRE CLASSE EXISTANTE PAR CELLE-CI
-# ==============================================================================
 class PseudonymizationApp:
     """
     Application principale de pseudonymisation
@@ -74,6 +80,14 @@ class PseudonymizationApp:
         self.model_trainer = None
         self.utils = AppUtils()
         
+        # Initialisation conditionnelle de l'analyseur de document
+        if DocumentAnalyzer:
+            self.document_analyzer = DocumentAnalyzer()
+            self.loaded_document = None
+            self.document_analysis = None
+        else:
+            self.document_analyzer = None
+
         self.setup_ui()
         self.create_directories()
         
@@ -176,7 +190,7 @@ class PseudonymizationApp:
         self.preview_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
     def create_training_tab(self):
-        """ Crée l'onglet d'entraînement. (Version nettoyée) """
+        """ Crée l'onglet d'entraînement. """
         training_frame = ttk.Frame(self.notebook)
         self.notebook.add(training_frame, text="3. Entraînement")
         
@@ -227,17 +241,30 @@ class PseudonymizationApp:
         
         self.training_log = scrolledtext.ScrolledText(log_frame, height=8, wrap=tk.WORD, state='disabled')
         self.training_log.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-        
+
     def create_pseudonymization_tab(self):
-        """ Crée l'onglet de pseudonymisation. """
-        # Ce code est correct, pas de changement nécessaire
+        """ Crée l'onglet de pseudonymisation des textes et documents. """
         pseudo_frame = ttk.Frame(self.notebook)
         self.notebook.add(pseudo_frame, text="4. Pseudonymisation")
         
-        title_label = tk.Label(pseudo_frame, text="Pseudonymisation de Texte", font=("Arial", 16, "bold"))
+        title_label = tk.Label(pseudo_frame, text="Pseudonymisation de Texte et Documents", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
         
-        model_frame = ttk.LabelFrame(pseudo_frame, text="Sélection du Modèle")
+        pseudo_notebook = ttk.Notebook(pseudo_frame)
+        pseudo_notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        
+        text_frame = ttk.Frame(pseudo_notebook)
+        pseudo_notebook.add(text_frame, text="Texte Simple")
+        self.create_text_pseudonymization_interface(text_frame)
+        
+        if self.document_analyzer:
+            doc_frame = ttk.Frame(pseudo_notebook)
+            pseudo_notebook.add(doc_frame, text="Documents Word (.docx)")
+            self.create_document_pseudonymization_interface(doc_frame)
+
+    def create_text_pseudonymization_interface(self, parent_frame):
+        """ Crée l'interface pour la pseudonymisation de texte simple. """
+        model_frame = ttk.LabelFrame(parent_frame, text="Sélection du Modèle")
         model_frame.pack(fill=tk.X, padx=20, pady=10)
         
         select_model_button = tk.Button(model_frame, text="Sélectionner Modèle Entraîné", command=self.select_trained_model, bg="#4CAF50", fg="white")
@@ -246,81 +273,270 @@ class PseudonymizationApp:
         self.model_status_label = tk.Label(model_frame, text="Aucun modèle sélectionné", fg="red")
         self.model_status_label.pack()
         
-        input_frame = ttk.LabelFrame(pseudo_frame, text="Texte à Pseudonymiser")
+        input_frame = ttk.LabelFrame(parent_frame, text="Texte à Pseudonymiser")
         input_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
-        input_buttons_frame = tk.Frame(input_frame)
-        input_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        tk.Button(input_buttons_frame, text="Importer Fichier", command=lambda: self.import_text_file(self.input_text), bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(input_buttons_frame, text="Effacer", command=lambda: self.input_text.delete(1.0, tk.END), bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.input_text = scrolledtext.ScrolledText(input_frame, height=8, wrap=tk.WORD)
         self.input_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        pseudo_button = tk.Button(pseudo_frame, text="Pseudonymiser", command=self.pseudonymize_text, bg="#FF9800", fg="white", font=("Arial", 12))
+        pseudo_button = tk.Button(parent_frame, text="Pseudonymiser Texte", command=self.pseudonymize_text, bg="#FF9800", fg="white", font=("Arial", 12))
         pseudo_button.pack(pady=10)
         
-        output_frame = ttk.LabelFrame(pseudo_frame, text="Texte Pseudonymisé")
+        output_frame = ttk.LabelFrame(parent_frame, text="Texte Pseudonymisé")
         output_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
-        output_buttons_frame = tk.Frame(output_frame)
-        output_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        tk.Button(output_buttons_frame, text="Exporter Fichier", command=lambda: self.export_text_file(self.output_text, "texte_pseudonymise.txt"), bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(output_buttons_frame, text="Copier vers Dépseudonymisation", command=self.copy_to_depseudo, bg="#9C27B0", fg="white").pack(side=tk.LEFT, padx=5)
         
         self.output_text = scrolledtext.ScrolledText(output_frame, height=8, wrap=tk.WORD)
         self.output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+    
+    def create_document_pseudonymization_interface(self, parent_frame):
+        """ Crée l'interface pour la pseudonymisation de documents Word. """
+        load_frame = ttk.LabelFrame(parent_frame, text="Chargement du Document")
+        load_frame.pack(fill=tk.X, padx=20, pady=10)
         
+        load_doc_button = tk.Button(load_frame, text="Charger Document Word (.docx)", command=self.load_word_document, bg="#4CAF50", fg="white")
+        load_doc_button.pack(pady=10)
+        
+        self.doc_status_label = tk.Label(load_frame, text="Aucun document chargé", fg="red")
+        self.doc_status_label.pack()
+        
+        analysis_buttons_frame = tk.Frame(load_frame)
+        analysis_buttons_frame.pack(pady=10)
+        
+        analyze_button = tk.Button(analysis_buttons_frame, text="Analyser le Document", command=self.analyze_document, bg="#2196F3", fg="white")
+        analyze_button.pack(side=tk.LEFT, padx=5)
+        
+        preview_button = tk.Button(analysis_buttons_frame, text="Aperçu du Document", command=self.preview_document, bg="#607D8B", fg="white")
+        preview_button.pack(side=tk.LEFT, padx=5)
+        
+        analysis_results_frame = ttk.LabelFrame(parent_frame, text="Résultats d'Analyse")
+        analysis_results_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        
+        self.document_analysis_text = scrolledtext.ScrolledText(analysis_results_frame, height=8, wrap=tk.WORD)
+        self.document_analysis_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        doc_actions_frame = tk.Frame(parent_frame)
+        doc_actions_frame.pack(pady=10)
+        
+        pseudo_doc_button = tk.Button(doc_actions_frame, text="Pseudonymiser Document", command=self.pseudonymize_document, bg="#FF9800", fg="white", font=("Arial", 11))
+        pseudo_doc_button.pack(side=tk.LEFT, padx=5)
+        
+        export_report_button = tk.Button(doc_actions_frame, text="Exporter Rapport d'Analyse", command=self.export_analysis_report, bg="#9C27B0", fg="white", font=("Arial", 11))
+        export_report_button.pack(side=tk.LEFT, padx=5)
+
     def create_depseudonymization_tab(self):
-        """ Crée l'onglet de dépseudonymisation. """
-        # Ce code est correct, pas de changement nécessaire
+        """ Crée l'onglet de dépseudonymisation (version corrigée). """
         depseudo_frame = ttk.Frame(self.notebook)
         self.notebook.add(depseudo_frame, text="5. Dépseudonymisation")
-        
+
         title_label = tk.Label(depseudo_frame, text="Dépseudonymisation de Texte", font=("Arial", 16, "bold"))
         title_label.pack(pady=10)
-        
+
         corresp_frame = ttk.LabelFrame(depseudo_frame, text="Fichier de Correspondance")
         corresp_frame.pack(fill=tk.X, padx=20, pady=10)
-        
+
         load_corresp_button = tk.Button(corresp_frame, text="Charger Fichier de Correspondance", command=self.load_correspondence_file, bg="#4CAF50", fg="white")
         load_corresp_button.pack(pady=10)
         
-        self.corresp_status_label = tk.Label(corresp_frame, text="Aucun fichier chargé", fg="red")
+        self.corresp_status_label = tk.Label(corresp_frame, text="Aucun fichier de correspondance chargé", fg="red")
         self.corresp_status_label.pack()
+
+        input_frame = ttk.LabelFrame(depseudo_frame, text="Texte à Dépseudonymiser")
+        input_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        pseudo_input_frame = ttk.LabelFrame(depseudo_frame, text="Texte Pseudonymisé")
-        pseudo_input_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
-        pseudo_buttons_frame = tk.Frame(pseudo_input_frame)
-        pseudo_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        tk.Button(pseudo_buttons_frame, text="Importer Fichier", command=lambda: self.import_text_file(self.pseudo_input_text), bg="#2196F3", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(pseudo_buttons_frame, text="Effacer", command=lambda: self.pseudo_input_text.delete(1.0, tk.END), bg="#FF5722", fg="white").pack(side=tk.LEFT, padx=5)
-        
-        self.pseudo_input_text = scrolledtext.ScrolledText(pseudo_input_frame, height=8, wrap=tk.WORD)
+        self.pseudo_input_text = scrolledtext.ScrolledText(input_frame, height=8, wrap=tk.WORD)
         self.pseudo_input_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-        
-        depseudo_button = tk.Button(depseudo_frame, text="Dépseudonymiser", command=self.depseudonymize_text, bg="#9C27B0", fg="white", font=("Arial", 12))
+
+        depseudo_button = tk.Button(depseudo_frame, text="Dépseudonymiser", command=self.depseudonymize_text, bg="#2196F3", fg="white", font=("Arial", 12))
         depseudo_button.pack(pady=10)
+
+        output_frame = ttk.LabelFrame(depseudo_frame, text="Texte Original Restauré")
+        output_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        depseudo_output_frame = ttk.LabelFrame(depseudo_frame, text="Texte Original Restauré")
-        depseudo_output_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
-        restore_buttons_frame = tk.Frame(depseudo_output_frame)
-        restore_buttons_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        tk.Button(restore_buttons_frame, text="Exporter Fichier", command=lambda: self.export_text_file(self.depseudo_output_text, "texte_original.txt"), bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        
-        self.depseudo_output_text = scrolledtext.ScrolledText(depseudo_output_frame, height=8, wrap=tk.WORD)
+        self.depseudo_output_text = scrolledtext.ScrolledText(output_frame, height=8, wrap=tk.WORD)
         self.depseudo_output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-    
+
     # ==============================================================================
-    # SECTION DES MÉTHODES DE LA CLASSE
+    # DÉBUT DES MÉTHODES DE LA CLASSE (INDENTATION CORRIGÉE)
     # ==============================================================================
     
+    def load_word_document(self):
+        """ Charge un document Word pour analyse et pseudonymisation. """
+        if not self.document_analyzer:
+            messagebox.showerror("Erreur", "L'analyseur de documents n'est pas disponible.\n"
+                               "Installez python-docx avec: pip install python-docx")
+            return
+        
+        filepath = filedialog.askopenfilename(
+            title="Sélectionner un document Word",
+            filetypes=[("Documents Word", "*.docx"), ("Tous les fichiers", "*.*")]
+        )
+        
+        if filepath:
+            try:
+                if self.document_analyzer.load_document(filepath):
+                    self.loaded_document = filepath
+                    self.doc_status_label.config(text=f"✅ Document chargé: {Path(filepath).name}", fg="green")
+                    self.update_status(f"Document Word chargé: {Path(filepath).name}")
+                else:
+                    messagebox.showerror("Erreur", "Impossible de charger le document")
+            except Exception as e:
+                messagebox.showerror("Erreur de chargement", f"Erreur: {e}")
+
+    def analyze_document(self):
+        """ Lance l'analyse du document chargé. """
+        if not self.loaded_document or not self.document_analyzer:
+            messagebox.showwarning("Document requis", "Veuillez d'abord charger un document Word")
+            return
+        
+        if not self.trained_model_path:
+            messagebox.showwarning("Modèle requis", "Veuillez d'abord sélectionner un modèle entraîné pour l'analyse.")
+            return
+
+        if self.pseudonymizer is None:
+            self.pseudonymizer = TextPseudonymizer(self.trained_model_path)
+        
+        try:
+            progress_dialog = ProgressDialog(self.root, "Analyse du document en cours...")
+            document_info = self.document_analyzer.extract_text_with_structure()
+            entities_analysis = self.document_analyzer.analyze_entities_in_document(
+                self.pseudonymizer.nlp,
+                entity_types=self.custom_entities if self.custom_entities else None
+            )
+            progress_dialog.destroy()
+            
+            self.document_analysis = {'document_info': document_info, 'entities_analysis': entities_analysis}
+            self.display_document_analysis()
+            
+            messagebox.showinfo("Analyse terminée", 
+                               f"Document analysé avec succès!\n"
+                               f"Entités trouvées: {entities_analysis['total_entities']}\n"
+                               f"Entités uniques: {len(entities_analysis['unique_entities'])}")
+        except Exception as e:
+            if 'progress_dialog' in locals():
+                progress_dialog.destroy()
+            messagebox.showerror("Erreur d'analyse", f"Erreur lors de l'analyse: {e}")
+
+    def display_document_analysis(self):
+        """ Affiche les résultats de l'analyse du document. """
+        if not self.document_analysis:
+            return
+        
+        doc_info = self.document_analysis['document_info']
+        entities_info = self.document_analysis['entities_analysis']
+        
+        display_text = f"📄 ANALYSE DU DOCUMENT: {doc_info['filename']}\n"
+        display_text += "=" * 60 + "\n\n"
+        display_text += "📊 STATISTIQUES GÉNÉRALES:\n"
+        display_text += f"• Paragraphes: {doc_info['total_paragraphs']}\n"
+        display_text += f"• Tableaux: {doc_info['total_tables']}\n"
+        display_text += f"• Mots total: {doc_info['total_words']}\n\n"
+        display_text += "🎯 ENTITÉS IDENTIFIÉES:\n"
+        display_text += f"• Total d'entités: {entities_info['total_entities']}\n"
+        display_text += f"• Entités uniques: {len(entities_info['unique_entities'])}\n\n"
+        
+        if entities_info['entities_by_type']:
+            display_text += "📋 RÉPARTITION PAR TYPE:\n"
+            for entity_type, entities in entities_info['entities_by_type'].items():
+                unique_entities = list(set(entities))
+                display_text += f"• {entity_type}: {len(entities)} occurrences, {len(unique_entities)} uniques\n"
+                for entity in unique_entities[:5]:
+                    count = entities.count(entity)
+                    display_text += f"  - {entity} ({count}x)\n"
+                if len(unique_entities) > 5:
+                    display_text += f"  ... et {len(unique_entities) - 5} autres\n"
+                display_text += "\n"
+        
+        self.document_analysis_text.delete(1.0, tk.END)
+        self.document_analysis_text.insert(1.0, display_text)
+
+    def preview_document(self):
+        """ Affiche un aperçu du document chargé. """
+        if not self.loaded_document or not self.document_analyzer:
+            messagebox.showwarning("Document requis", "Veuillez d'abord charger un document Word")
+            return
+        
+        try:
+            if not hasattr(self.document_analyzer, 'extracted_text') or not self.document_analyzer.extracted_text:
+                self.document_analyzer.extract_text_with_structure()
+            
+            preview_text = self.document_analyzer.get_document_preview(2000)
+            
+            preview_window = tk.Toplevel(self.root)
+            preview_window.title(f"Aperçu - {Path(self.loaded_document).name}")
+            preview_window.geometry("800x600")
+            
+            preview_text_widget = scrolledtext.ScrolledText(preview_window, wrap=tk.WORD)
+            preview_text_widget.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            preview_text_widget.insert(1.0, preview_text)
+            preview_text_widget.config(state=tk.DISABLED)
+            
+        except Exception as e:
+            messagebox.showerror("Erreur d'aperçu", f"Erreur: {e}")
+
+    def pseudonymize_document(self):
+        """ Lance la pseudonymisation du document Word. """
+        if not self.document_analysis or not self.document_analyzer:
+            messagebox.showwarning("Analyse requise", "Veuillez d'abord analyser le document")
+            return
+        
+        if self.pseudonymizer is None:
+            messagebox.showwarning("Modèle requis", "Veuillez sélectionner un modèle de pseudonymisation")
+            return
+        
+        try:
+            entities_analysis = self.document_analysis['entities_analysis']
+            pseudonymization_map = {}
+            
+            for entity in entities_analysis['unique_entities']:
+                pseudonym = self.pseudonymizer.generate_pseudonym(entity, 'UNKNOWN') # Le type n'est pas connu ici, fallback
+                pseudonymization_map[entity] = pseudonym
+            
+            progress_dialog = ProgressDialog(self.root, "Pseudonymisation du document...")
+            
+            pseudonymized_doc = self.document_analyzer.pseudonymize_document(pseudonymization_map, highlight_changes=True)
+            output_path = self.document_analyzer.save_pseudonymized_document(pseudonymized_doc)
+            correspondence_path = self.save_correspondence_file(pseudonymization_map)
+            
+            progress_dialog.destroy()
+            
+            messagebox.showinfo("Pseudonymisation terminée", 
+                               f"Document pseudonymisé sauvegardé:\n{output_path}\n\n"
+                               f"Fichier de correspondance:\n{correspondence_path}")
+            self.update_status("Document pseudonymisé avec succès")
+        except Exception as e:
+            if 'progress_dialog' in locals():
+                progress_dialog.destroy()
+            messagebox.showerror("Erreur de pseudonymisation", f"Erreur: {e}")
+
+    def export_analysis_report(self):
+        """ Exporte un rapport d'analyse détaillé. """
+        if not self.document_analysis or not self.document_analyzer:
+            messagebox.showwarning("Analyse requise", "Veuillez d'abord analyser un document")
+            return
+        
+        try:
+            report_path = self.document_analyzer.export_analysis_report()
+            messagebox.showinfo("Rapport exporté", f"Rapport d'analyse sauvegardé:\n{report_path}")
+            if messagebox.askyesno("Ouvrir le rapport", "Voulez-vous ouvrir le rapport maintenant ?"):
+                os.startfile(report_path)
+        except Exception as e:
+            messagebox.showerror("Erreur d'export", f"Erreur lors de l'export: {e}")
+
+    def _save_correspondence_map(self, pseudonymization_map: Dict[str, str]) -> str:
+        """ Sauvegarde le fichier de correspondance. """
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        correspondence_path = f"data/correspondence_{timestamp}.json"
+        
+        correspondence_data = {
+            'timestamp': timestamp,
+            'document': Path(self.loaded_document).name if self.loaded_document else "unknown",
+            'correspondences': pseudonymization_map
+        }
+        
+        with open(correspondence_path, 'w', encoding='utf-8') as f:
+            json.dump(correspondence_data, f, indent=2, ensure_ascii=False)
+        return correspondence_path
+
     def add_custom_entity(self):
         """ Ajoute une entité personnalisée à la liste. """
         entity = self.entity_entry.get().strip().upper()
@@ -419,7 +635,6 @@ class PseudonymizationApp:
             if not isinstance(json_data, list):
                 raise ValueError("Le fichier JSON doit contenir une liste d'exemples.")
             
-            # Conversion au format SpaCy interne : [(text, {"entities": ...}), ...]
             training_data = []
             for item in json_data:
                 if 'text' in item and 'entities' in item:
@@ -440,45 +655,33 @@ class PseudonymizationApp:
         except Exception as e:
             messagebox.showerror("Erreur de chargement", f"Impossible de charger ou de valider le fichier :\n{e}")
 
-    # --- MÉTHODES D'ENTRAÎNEMENT CORRIGÉES ---
-
     def set_training_state(self, is_training):
         """ Active ou désactive les contrôles de l'interface pendant l'entraînement. """
         state = 'disabled' if is_training else 'normal'
-        
-        # Bouton d'entraînement
         self.train_button.config(state=state)
-        
-        # Contrôles des paramètres
         self.epochs_spinbox.config(state=state)
         self.batch_spinbox.config(state=state)
-
-        # Désactive les autres onglets
         for i, tab in enumerate(self.notebook.tabs()):
-            if i != 2: # Ne désactive pas l'onglet d'entraînement lui-même
+            if i != 2:
                 self.notebook.tab(i, state=state)
 
     def start_training(self):
-        """ Lance l'entraînement du modèle (version robuste et corrigée). """
+        """ Lance l'entraînement du modèle. """
         if self.training_in_progress:
             messagebox.showwarning("Entraînement en cours", "Veuillez attendre la fin de l'entraînement actuel.")
             return
-
         if not self.generated_training_data:
             messagebox.showwarning("Données manquantes", "Veuillez générer ou charger des données d'entraînement.")
             return
-            
         if not self.custom_entities:
             messagebox.showwarning("Configuration manquante", "Veuillez définir au moins une entité personnalisée.")
             return
         
         try:
             self.model_trainer = SpacyModelTrainer(self.selected_base_model.get())
-            
             if not self.model_trainer.load_base_model():
                 messagebox.showerror("Erreur de modèle", f"Impossible de charger le modèle de base : {self.selected_base_model.get()}")
                 return
-            
             if not self.model_trainer.add_custom_entities(self.custom_entities):
                 messagebox.showerror("Erreur de configuration", "Impossible d'ajouter les entités personnalisées au modèle.")
                 return
@@ -486,9 +689,7 @@ class PseudonymizationApp:
             training_config = {
                 'n_iter': self.epochs_var.get(),
                 'batch_size': self.batch_size_var.get(),
-                'dropout': 0.2,
-                'patience': 5,
-                'validation_split': 0.2
+                'dropout': 0.2, 'patience': 5, 'validation_split': 0.2
             }
             
             self.training_log.config(state='normal')
@@ -496,18 +697,13 @@ class PseudonymizationApp:
             self.log_training_message("🚀 Initialisation de l'entraînement...\n")
             self.training_log.config(state='disabled')
 
-            training_thread = threading.Thread(
-                target=self._run_training,
-                args=(training_config,),
-                daemon=True
-            )
+            training_thread = threading.Thread(target=self._run_training, args=(training_config,), daemon=True)
             training_thread.start()
-            
         except Exception as e:
             messagebox.showerror("Erreur de lancement", f"Impossible de démarrer l'entraînement : {e}")
 
     def _run_training(self, config):
-        """ Exécute l'entraînement dans un thread pour ne pas geler l'interface. """
+        """ Exécute l'entraînement dans un thread. """
         try:
             self.training_in_progress = True
             self.root.after(0, self.set_training_state, True)
@@ -519,20 +715,16 @@ class PseudonymizationApp:
             
             results = self.model_trainer.train_model(self.generated_training_data, config, progress_callback)
             self.root.after(0, self._handle_training_results, results)
-            
         except Exception as e:
             error_msg = f"❌ Erreur critique pendant l'entraînement: {e}\n"
             self.root.after(0, self.log_training_message, error_msg)
-            # Correction de la NameError avec une lambda qui capture 'e'
             self.root.after(0, lambda err=e: messagebox.showerror("Erreur d'entraînement", str(err)))
-            
         finally:
             self.training_in_progress = False
-            # Le bloc finally garantit que l'interface est toujours réactivée
             self.root.after(0, self.set_training_state, False)
 
     def _handle_training_results(self, results):
-        """ Traite et affiche les résultats à la fin de l'entraînement. """
+        """ Traite les résultats à la fin de l'entraînement. """
         self.progress_var.set(0)
         if results.get('success', False):
             final_metrics = results.get('final_metrics', {})
@@ -567,11 +759,9 @@ class PseudonymizationApp:
             self.log_training_message(f"💾 Modèle sauvegardé : {model_path}\n")
         except Exception as e:
             messagebox.showerror("Erreur de sauvegarde", f"Erreur : {e}")
-
-    # --- AUTRES MÉTHODES ---
     
     def log_training_message(self, message):
-        """ Ajoute un message au log d'entraînement de manière sécurisée. """
+        """ Ajoute un message au log d'entraînement. """
         self.training_log.config(state='normal')
         self.training_log.insert(tk.END, message)
         self.training_log.see(tk.END)
@@ -579,13 +769,12 @@ class PseudonymizationApp:
         self.root.update_idletasks()
 
     def select_trained_model(self):
-        """ Permet de sélectionner un dossier contenant un modèle entraîné. """
+        """ Sélectionne un dossier contenant un modèle entraîné. """
         model_path = filedialog.askdirectory(title="Sélectionner le dossier du modèle entraîné")
         if not model_path:
             return
 
         try:
-            # On utilise une instance temporaire pour ne pas écraser le trainer actuel
             test_trainer = SpacyModelTrainer()
             if test_trainer.load_trained_model(model_path):
                 self.trained_model_path = model_path
@@ -604,7 +793,7 @@ class PseudonymizationApp:
             messagebox.showerror("Erreur de chargement", f"Erreur : {e}")
 
     def test_trained_model(self):
-        """ Permet de tester le modèle actuellement chargé. """
+        """ Teste le modèle actuellement chargé. """
         if not self.trained_model_path:
             messagebox.showwarning("Modèle manquant", "Veuillez d'abord sélectionner un modèle entraîné.")
             return
@@ -648,11 +837,9 @@ class PseudonymizationApp:
                 self.pseudonymizer = TextPseudonymizer()
                 self.pseudonymizer.load_model(self.trained_model_path)
 
-            # Utilise les entités du modèle chargé pour le dialogue
             entities_in_model = self.pseudonymizer.nlp.get_pipe("ner").labels
-            
             entity_selection = EntityMaskingDialog(self.root, list(entities_in_model))
-            if entity_selection.result is None: # L'utilisateur a annulé
+            if entity_selection.result is None:
                 return
 
             pseudonymized_text, stats = self.pseudonymizer.pseudonymize_text(
@@ -667,19 +854,18 @@ class PseudonymizationApp:
             if messagebox.askyesno("Sauvegarde", f"Pseudonymisation terminée !\n\n{stats_message}\n\nVoulez-vous sauvegarder le fichier de correspondance ?"):
                 self.save_correspondence_file(stats)
             self.update_status(f"Pseudonymisation terminée : {stats['entities_processed']} entités traitées.")
-            
         except Exception as e:
             messagebox.showerror("Erreur de pseudonymisation", f"Erreur : {e}")
 
     def _format_pseudonymization_stats(self, stats):
-        """ Met en forme les statistiques de pseudonymisation pour l'affichage. """
+        """ Met en forme les statistiques de pseudonymisation. """
         text = f"Entités traitées: {stats['entities_processed']}\n"
         text += f"Nouveaux pseudonymes: {stats['pseudonyms_created']}\n"
         text += f"Pseudonymes réutilisés: {stats['pseudonyms_reused']}"
         return text
 
     def save_correspondence_file(self, pseudonymization_stats):
-        """ Sauvegarde le fichier de correspondance après pseudonymisation. """
+        """ Sauvegarde le fichier de correspondance. """
         filepath = filedialog.asksaveasfilename(title="Sauvegarder le fichier de correspondance", defaultextension=".json", filetypes=[("Fichiers JSON", "*.json")])
         if filepath:
             try:
@@ -701,7 +887,7 @@ class PseudonymizationApp:
             messagebox.showwarning("Aucun texte", "Il n'y a pas de texte à copier.")
     
     def load_correspondence_file(self):
-        """ Charge un fichier de correspondance pour la dépseudonymisation. """
+        """ Charge un fichier de correspondance. """
         filepath = filedialog.askopenfilename(title="Charger un fichier de correspondance", filetypes=[("Fichiers JSON", "*.json")])
         if not filepath:
             return
@@ -722,7 +908,7 @@ class PseudonymizationApp:
             messagebox.showerror("Erreur de chargement", f"Erreur : {e}")
 
     def depseudonymize_text(self):
-        """ Dépseudonymise le texte en utilisant le fichier de correspondance chargé. """
+        """ Dépseudonymise le texte. """
         if not self.correspondence_file_path:
             messagebox.showwarning("Fichier manquant", "Veuillez charger un fichier de correspondance.")
             return
@@ -741,7 +927,7 @@ class PseudonymizationApp:
             messagebox.showerror("Erreur de dépseudonymisation", f"Erreur : {e}")
     
     def import_text_file(self, text_widget):
-        """ Utilitaire pour importer un fichier texte dans une zone de texte. """
+        """ Importe un fichier texte dans une zone de texte. """
         filepath = filedialog.askopenfilename(title="Importer un fichier texte", filetypes=[("Fichiers texte", "*.txt")])
         if filepath:
             try:
@@ -754,7 +940,7 @@ class PseudonymizationApp:
                 messagebox.showerror("Erreur d'importation", f"Erreur : {e}")
 
     def export_text_file(self, text_widget, default_name="exported_text.txt"):
-        """ Utilitaire pour exporter le contenu d'une zone de texte. """
+        """ Exporte le contenu d'une zone de texte. """
         content = text_widget.get(1.0, tk.END).strip()
         if not content:
             messagebox.showwarning("Contenu vide", "Il n'y a rien à exporter.")
@@ -770,7 +956,7 @@ class PseudonymizationApp:
                 messagebox.showerror("Erreur d'exportation", f"Erreur : {e}")
     
     def update_status(self, message):
-        """ Met à jour la barre de statut en bas de la fenêtre. """
+        """ Met à jour la barre de statut. """
         self.status_bar.config(text=message)
 
 # ======================
@@ -778,43 +964,28 @@ class PseudonymizationApp:
 # ======================
 
 class EntitySelectionDialog:
-    """
-    Dialogue pour sélectionner un type d'entité
-    """
+    """ Dialogue pour sélectionner un type d'entité. """
     def __init__(self, parent, entities):
         self.result = None
-        
-        # Crée la fenêtre de dialogue
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Sélection du type d'entité")
         self.dialog.geometry("300x200")
         self.dialog.transient(parent)
         self.dialog.grab_set()
-        
-        # Centre la fenêtre
         self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 50, parent.winfo_rooty() + 50))
         
-        # Contenu du dialogue
-        tk.Label(self.dialog, text="Sélectionnez le type d'entité pour ce fichier:",
-                font=("Arial", 10)).pack(pady=10)
+        tk.Label(self.dialog, text="Sélectionnez le type d'entité pour ce fichier:", font=("Arial", 10)).pack(pady=10)
         
         self.selected_entity = tk.StringVar(value=entities[0] if entities else "")
-        
         for entity in entities:
-            rb = tk.Radiobutton(self.dialog, text=entity, 
-                               variable=self.selected_entity, value=entity)
+            rb = tk.Radiobutton(self.dialog, text=entity, variable=self.selected_entity, value=entity)
             rb.pack(anchor=tk.W, padx=20)
         
-        # Boutons
         button_frame = tk.Frame(self.dialog)
         button_frame.pack(pady=20)
+        tk.Button(button_frame, text="OK", command=self.ok_clicked, bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked, bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
         
-        tk.Button(button_frame, text="OK", command=self.ok_clicked,
-                 bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked,
-                 bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
-        
-        # Attend la fermeture du dialogue
         self.dialog.wait_window()
     
     def ok_clicked(self):
@@ -825,139 +996,94 @@ class EntitySelectionDialog:
         self.result = None
         self.dialog.destroy()
 
-
 class EntityMaskingDialog:
-    """
-    Dialogue pour sélectionner les types d'entités à pseudonymiser
-    """
+    """ Dialogue pour sélectionner les types d'entités à pseudonymiser. """
     def __init__(self, parent, available_entities):
         self.result = None
-        
-        # Crée la fenêtre de dialogue
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Sélection des entités à pseudonymiser")
         self.dialog.geometry("400x300")
         self.dialog.transient(parent)
         self.dialog.grab_set()
-        
-        # Centre la fenêtre
         self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 50, parent.winfo_rooty() + 50))
         
-        # Contenu du dialogue
-        tk.Label(self.dialog, text="Sélectionnez les types d'entités à pseudonymiser:",
-                font=("Arial", 10)).pack(pady=10)
+        tk.Label(self.dialog, text="Sélectionnez les types d'entités à pseudonymiser:", font=("Arial", 10)).pack(pady=10)
         
-        # Frame pour les checkboxes
         checkboxes_frame = tk.Frame(self.dialog)
         checkboxes_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Variables pour les checkboxes
         self.entity_vars = {}
-        
-        # Option "Toutes les entités"
         self.all_entities_var = tk.BooleanVar(value=True)
-        all_cb = tk.Checkbutton(checkboxes_frame, text="Toutes les entités", 
-                               variable=self.all_entities_var,
-                               command=self.toggle_all_entities,
-                               font=("Arial", 10, "bold"))
+        all_cb = tk.Checkbutton(checkboxes_frame, text="Toutes les entités", variable=self.all_entities_var, command=self.toggle_all_entities, font=("Arial", 10, "bold"))
         all_cb.pack(anchor=tk.W, pady=5)
         
-        # Séparateur
         tk.Frame(checkboxes_frame, height=2, bg="gray").pack(fill=tk.X, pady=5)
         
-        # Checkboxes pour chaque type d'entité
         for entity in available_entities:
-            var = tk.BooleanVar(value=False)
+            var = tk.BooleanVar(value=True) # Par défaut, tout est coché
             self.entity_vars[entity] = var
-            
-            cb = tk.Checkbutton(checkboxes_frame, text=entity, 
-                               variable=var,
-                               command=self.update_all_checkbox)
+            cb = tk.Checkbutton(checkboxes_frame, text=entity, variable=var, command=self.update_all_checkbox)
             cb.pack(anchor=tk.W, pady=2)
         
-        # Boutons
+        self.toggle_all_entities() # Appeler pour synchroniser l'état initial
+        
         button_frame = tk.Frame(self.dialog)
         button_frame.pack(pady=20)
+        tk.Button(button_frame, text="OK", command=self.ok_clicked, bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked, bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
         
-        tk.Button(button_frame, text="OK", command=self.ok_clicked,
-                 bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked,
-                 bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
-        
-        # Attend la fermeture du dialogue
         self.dialog.wait_window()
     
     def toggle_all_entities(self):
-        """Active/désactive toutes les entités"""
-        all_selected = self.all_entities_var.get()
+        is_checked = self.all_entities_var.get()
         for var in self.entity_vars.values():
-            var.set(not all_selected)  # Inverse car "Toutes" signifie ne rien sélectionner spécifiquement
+            var.set(is_checked)
     
     def update_all_checkbox(self):
-        """Met à jour la checkbox "Toutes les entités" selon les sélections"""
-        any_selected = any(var.get() for var in self.entity_vars.values())
-        self.all_entities_var.set(not any_selected)
+        all_selected = all(var.get() for var in self.entity_vars.values())
+        self.all_entities_var.set(all_selected)
     
     def ok_clicked(self):
-        if self.all_entities_var.get():
-            # Toutes les entités sélectionnées
-            self.result = []  # Liste vide = toutes les entités
-        else:
-            # Entités spécifiques sélectionnées
-            selected = [entity for entity, var in self.entity_vars.items() if var.get()]
-            self.result = selected if selected else []
-        
+        self.result = [entity for entity, var in self.entity_vars.items() if var.get()]
+        if not self.result:
+            # Si rien n'est coché, on peut considérer que l'utilisateur ne veut rien masquer
+            # ou qu'il veut tout masquer, cela dépend de la logique attendue. 
+            # Renvoyer une liste vide semble plus sûr.
+            self.result = []
         self.dialog.destroy()
     
     def cancel_clicked(self):
         self.result = None
         self.dialog.destroy()
 
-
 class TestModelDialog:
-    """
-    Dialogue pour tester un modèle entraîné
-    """
+    """ Dialogue pour tester un modèle entraîné. """
     def __init__(self, parent):
         self.result = None
-        
-        # Crée la fenêtre de dialogue
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Test du Modèle")
         self.dialog.geometry("500x300")
         self.dialog.transient(parent)
         self.dialog.grab_set()
-        
-        # Centre la fenêtre
         self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 50, parent.winfo_rooty() + 50))
         
-        # Contenu du dialogue
-        tk.Label(self.dialog, text="Saisissez un texte pour tester le modèle:",
-                font=("Arial", 10)).pack(pady=10)
+        tk.Label(self.dialog, text="Saisissez un texte pour tester le modèle:", font=("Arial", 10)).pack(pady=10)
         
-        # Zone de saisie de texte
         text_frame = tk.Frame(self.dialog)
         text_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
         self.text_widget = scrolledtext.ScrolledText(text_frame, height=8, wrap=tk.WORD)
         self.text_widget.pack(fill=tk.BOTH, expand=True)
         
-        # Texte d'exemple
         example_text = ("Monsieur Dupont travaille à l'établissement ABC123. "
                        "L'organisation XYZ Corp a son siège à Paris. "
                        "Le code d'identification EST-456 correspond à notre filiale.")
         self.text_widget.insert(1.0, example_text)
         
-        # Boutons
         button_frame = tk.Frame(self.dialog)
         button_frame.pack(pady=20)
+        tk.Button(button_frame, text="Tester", command=self.test_clicked, bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked, bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
         
-        tk.Button(button_frame, text="Tester", command=self.test_clicked,
-                 bg="#4CAF50", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(button_frame, text="Annuler", command=self.cancel_clicked,
-                 bg="#f44336", fg="white").pack(side=tk.LEFT, padx=5)
-        
-        # Attend la fermeture du dialogue
         self.dialog.wait_window()
     
     def test_clicked(self):
@@ -968,35 +1094,27 @@ class TestModelDialog:
         self.result = None
         self.dialog.destroy()
 
-
 class ProgressDialog:
-    """
-    Dialogue de progression simple
-    """
+    """ Dialogue de progression simple. """
     def __init__(self, parent, message):
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("Progression")
         self.dialog.geometry("400x100")
         self.dialog.transient(parent)
         self.dialog.grab_set()
-        
-        # Centre la fenêtre
         self.dialog.geometry("+%d+%d" % (parent.winfo_rootx() + 100, parent.winfo_rooty() + 100))
         
         tk.Label(self.dialog, text=message, font=("Arial", 10)).pack(pady=10)
         
-        # Barre de progression indéterminée
         self.progress = ttk.Progressbar(self.dialog, mode='indeterminate')
         self.progress.pack(pady=10, padx=20, fill=tk.X)
         self.progress.start()
         
-        # Met à jour l'affichage
         self.dialog.update()
     
     def destroy(self):
         self.progress.stop()
         self.dialog.destroy()
-
 
 # ======================
 # FONCTION PRINCIPALE
@@ -1006,260 +1124,9 @@ def main():
     """
     Fonction principale qui lance l'application
     """
-    # Création de la fenêtre principale
     root = tk.Tk()
-    
-    # Initialisation de l'application
     app = PseudonymizationApp(root)
-    
-    # Lancement de la boucle principale
     root.mainloop()
-
 
 if __name__ == "__main__":
     main()
-
-
-# def start_training(self):
-#     """
-#     Lance l'entraînement du modèle avec les données chargées
-#     """
-#     if not self.generated_training_data:
-#         messagebox.showwarning("Données manquantes", 
-#                              "Veuillez d'abord générer ou charger des données d'entraînement")
-#     return
-    
-#     # Vérifie le format des données avant l'entraînement
-#     if not isinstance(self.generated_training_data, list):
-#         messagebox.showerror("Erreur de format", 
-#                            "Les données d'entraînement ne sont pas au bon format")
-#         return
-    
-#     if len(self.generated_training_data) == 0:
-#         messagebox.showerror("Données vides", 
-#                            "Aucune donnée d'entraînement disponible")
-#         return
-    
-#     # Vérifie le format du premier élément
-#     try:
-#         first_item = self.generated_training_data[0]
-#         if not (isinstance(first_item, (list, tuple)) and len(first_item) == 2):
-#             raise ValueError("Format d'item invalide")
-        
-#         text, annotations = first_item
-#         if not isinstance(text, str) or not isinstance(annotations, dict):
-#             raise ValueError("Types d'item invalides")
-            
-#     except (IndexError, ValueError) as e:
-#         messagebox.showerror("Erreur de format", 
-#                            f"Format des données d'entraînement invalide: {e}")
-#         return
-    
-#     if not self.custom_entities:
-#         messagebox.showwarning("Configuration manquante", 
-#                              "Veuillez d'abord configurer vos entités personnalisées")
-#         return
-    
-#     # Vérifie si un entraînement est déjà en cours
-#     if hasattr(self, 'training_in_progress') and self.training_in_progress:
-#         messagebox.showwarning("Entraînement en cours", 
-#                              "Un entraînement est déjà en cours. Veuillez patienter.")
-#         return
-    
-#     try:
-#         # Initialise le trainer
-#         self.model_trainer = SpacyModelTrainer(self.selected_base_model.get())
-        
-#         # Charge le modèle de base
-#         self.log_training_message("📥 Chargement du modèle de base...\n")
-#         if not self.model_trainer.load_base_model():
-#             messagebox.showerror("Erreur de modèle", 
-#                                f"Impossible de charger le modèle {self.selected_base_model.get()}")
-#             return
-        
-#         # Ajoute les entités personnalisées
-#         self.log_training_message("🏷️ Ajout des entités personnalisées...\n")
-#         if not self.model_trainer.add_custom_entities(self.custom_entities):
-#             messagebox.showerror("Erreur de configuration", 
-#                                "Impossible d'ajouter les entités personnalisées")
-#             return
-        
-#         # Configuration d'entraînement
-#         training_config = {
-#             'n_iter': self.epochs_var.get(),
-#             'batch_size': self.batch_size_var.get(),
-#             'dropout': 0.2,
-#             'patience': 5,
-#             'validation_split': 0.2
-#         }
-        
-#         # Efface le log précédent
-#         self.training_log.delete(1.0, tk.END)
-#         self.log_training_message("🚀 Initialisation de l'entraînement...\n")
-#         self.log_training_message(f"📊 Configuration: {training_config}\n")
-#         self.log_training_message(f"📦 Données: {len(self.generated_training_data)} exemples\n\n")
-        
-#         # Désactive les boutons pendant l'entraînement
-#         self.set_training_state(True)
-        
-#         # Lance l'entraînement dans un thread séparé
-#         training_thread = threading.Thread(
-#             target=self._run_training,
-#             args=(training_config,),
-#             daemon=True
-#         )
-#         training_thread.start()
-        
-#         # Marque l'entraînement comme en cours
-#         self.training_in_progress = True
-        
-#         self.update_status("Entraînement en cours - Veuillez patienter...")
-        
-#     except Exception as e:
-#         self.log_training_message(f"❌ Erreur lors de l'initialisation: {e}\n")
-#         messagebox.showerror("Erreur d'entraînement", f"Erreur lors du lancement: {e}")
-#         self.set_training_state(False)
-
-# def set_training_state(self, training_active):
-#     # """
-#     # Active ou désactive les éléments de l'interface pendant l'entraînement
-    
-#     # Args:
-#     #     training_active (bool): True si l'entraînement est en cours
-#     # """
-#     try:
-#         # État des widgets
-#         state = 'disabled' if training_active else 'normal'
-        
-
-        
-#         # Bouton d'entraînement spécifique
-#         if hasattr(self, 'train_button'):
-#             if training_active:
-#                 self.train_button.config(
-#                     text="🔄 Entraînement en cours...", 
-#                     state='disabled', 
-#                     bg="#FF5722"
-#                 )
-#             else:
-#                 self.training_status_label.config(
-#                     text="✅ Prêt pour l'entraînement", 
-#                     fg="green"
-#                 )
-        
-#         # Désactive les spinbox de paramètres
-#         if hasattr(self, 'epochs_var'):
-#             # Trouve le spinbox des époques
-#             training_frame = self.notebook.nametowidget(self.notebook.tabs()[2])
-#             for widget in training_frame.winfo_children():
-#                 if isinstance(widget, ttk.LabelFrame) and "Paramètres" in widget.cget('text'):
-#                     for child in widget.winfo_children():
-#                         if isinstance(child, tk.Frame):
-#                             for subchild in child.winfo_children():
-#                                 if isinstance(subchild, tk.Spinbox):
-#                                     subchild.config(state=state)
-        
-#         # Met à jour le message de statut
-#         if training_active:
-#             self.update_status("🔄 Entraînement en cours - Veuillez patienter...")
-        
-#     except Exception as e:
-#         print(f"Erreur lors de la mise à jour de l'état de l'interface: {e}")
-
-# def _run_training(self, config):
-#     """
-#     Exécute l'entraînement dans un thread séparé
-    
-#     Args:
-#         config: Configuration d'entraînement
-#     """
-#     try:
-#         # Message de début
-#         self.root.after(0, lambda: self.log_training_message("⚡ Lancement de l'entraînement...\n"))
-        
-#         # Fonction de callback pour le suivi de progression
-#         def progress_callback(current_epoch, total_epochs, epoch_info):
-#             # Met à jour la barre de progression
-#             progress_percent = (current_epoch / total_epochs) * 100
-#             self.root.after(0, lambda: self.progress_var.set(progress_percent))
-            
-#             # Met à jour le log
-#             log_message = (f"Époque {current_epoch:2d}/{total_epochs} | "
-#                           f"Loss: {epoch_info.get('train_loss', 0):.4f} | "
-#                           f"Val F1: {epoch_info.get('val_f1', 0):.3f} | "
-#                           f"Temps: {epoch_info.get('epoch_time', 0):.1f}s\n")
-            
-#             self.root.after(0, lambda: self.log_training_message(log_message))
-            
-#             # Force la mise à jour de l'interface
-#             self.root.after(0, lambda: self.root.update_idletasks())
-        
-#         # Lance l'entraînement
-#         self.root.after(0, lambda: self.log_training_message("🎯 Début de l'entraînement proprement dit...\n"))
-        
-#         results = self.model_trainer.train_model(
-#             self.generated_training_data,
-#             config,
-#             progress_callback
-#         )
-        
-#         # Traite les résultats dans le thread principal
-#         self.root.after(0, lambda: self._handle_training_results(results))
-        
-#     except Exception as e:
-#         error_msg = f"❌ Erreur pendant l'entraînement: {e}\n"
-#         self.root.after(0, lambda: self.log_training_message(error_msg))
-#         self.root.after(0, lambda: messagebox.showerror("Erreur d'entraînement", str(e)))
-#         # Réactive l'interface en cas d'erreur
-#         self.root.after(0, lambda: self.set_training_state(False))
-#         self.root.after(0, lambda: setattr(self, 'training_in_progress', False))
-
-# def _handle_training_results(self, results):
-    # """
-    # Traite les résultats de l'entraînement
-    
-    # Args:
-    #     results: Résultats retournés par le trainer
-    # """
-    # # Réactive l'interface
-    # self.set_training_state(False)
-    # self.training_in_progress = False
-    
-    # if results.get('success', False):
-    #     # Entraînement réussi
-    #     final_metrics = results.get('final_metrics', {})
-        
-    #     success_message = (f"\n🎉 ENTRAÎNEMENT TERMINÉ AVEC SUCCÈS!\n"
-    #                       f"{'='*50}\n"
-    #                       f"📊 Métriques finales:\n"
-    #                       f"  - Précision: {final_metrics.get('precision', 0):.3f}\n"
-    #                       f"  - Rappel: {final_metrics.get('recall', 0):.3f}\n"
-    #                       f"  - F1-Score: {final_metrics.get('f1', 0):.3f}\n"
-    #                       f"  - Exactitude: {final_metrics.get('accuracy', 0):.3f}\n"
-    #                       f"  - Époques complétées: {results.get('epochs_completed', 0)}\n"
-    #                       f"{'='*50}\n\n")
-        
-    #     self.log_training_message(success_message)
-        
-    #     # Propose de sauvegarder le modèle
-    #     if messagebox.askyesno("Sauvegarde du modèle", 
-    #                          "🎉 Entraînement terminé avec succès!\n\n"
-    #                          f"F1-Score final: {final_metrics.get('f1', 0):.3f}\n"
-    #                          f"Précision: {final_metrics.get('precision', 0):.3f}\n"
-    #                          f"Rappel: {final_metrics.get('recall', 0):.3f}\n\n"
-    #                          "Voulez-vous sauvegarder le modèle entraîné ?"):
-    #         self.save_trained_model(results)
-        
-    #     # Met à jour le statut
-    #     self.update_status(f"✅ Entraînement terminé - F1-Score: {final_metrics.get('f1', 0):.3f}")
-        
-    # else:
-    #     # Entraînement échoué
-    #     error_message = f"\n❌ ÉCHEC DE L'ENTRAÎNEMENT\n{'='*30}\n{results.get('error', 'Erreur inconnue')}\n\n"
-    #     self.log_training_message(error_message)
-    #     messagebox.showerror("Échec de l'entraînement", 
-    #                        f"L'entraînement a échoué:\n\n{results.get('error', 'Erreur inconnue')}")
-    #     self.update_status("❌ Échec de l'entraînement")
-    
-    # # Remet la barre de progression à zéro
-    # self.progress_var.set(0)
