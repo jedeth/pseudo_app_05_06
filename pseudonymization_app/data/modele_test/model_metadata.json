@@ -1,0 +1,23 @@
+{
+  "base_model": "fr_core_news_sm",
+  "custom_entities": [
+    "INE",
+    "LOC",
+    "MISC",
+    "ORG",
+    "PER"
+  ],
+  "training_date": "2025-06-06T11:29:48.149787",
+  "model_info": {
+    "training_date": "2025-06-06T11:29:48.006540",
+    "base_model": "fr_core_news_sm",
+    "custom_entities": [
+      "INE"
+    ],
+    "final_metrics": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  }
+}

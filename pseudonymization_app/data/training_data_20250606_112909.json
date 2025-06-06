@@ -1,0 +1,502 @@
+[
+  {
+    "text": "Le terme 987654321CD apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Ainsi, le terme 123456789ab apparaît dans ce document. afin de répondre aux besoins.",
+    "entities": [
+      [
+        16,
+        27,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Néanmoins, il faut considérer 789012345gh dans notre évaluation. dans le cadre de notre activité.",
+    "entities": [
+      [
+        30,
+        41,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 0123456789A dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément 0987654321D est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme 5432109876E apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 5432109876E dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 1234567890C nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 9876543210B dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 9876543210B nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 0123456789A dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme 012345678IJ apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "En effet, nous devons traiter 012345678ij avec attention. en respect des normes en vigueur.",
+    "entities": [
+      [
+        30,
+        41,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Par ailleurs, nous devons traiter 123456789ab avec attention. pour améliorer nos services.",
+    "entities": [
+      [
+        34,
+        45,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, le cas 789012345gh nécessite un examen approfondi. pour améliorer nos services.",
+    "entities": [
+      [
+        16,
+        27,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément 0987654321D est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 1234567890C nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 1234567890C nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 0123456789A dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément 456789012EF est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, l'élément 012345678ij est important pour cette analyse. en respect des normes en vigueur.",
+    "entities": [
+      [
+        22,
+        33,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 456789012EF nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme 123456789AB apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 987654321CD nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 5432109876E nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme 5432109876E apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément 012345678IJ est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 987654321CD avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Par conséquent, le cas 0987654321d nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        23,
+        34,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Finalement, nous devons traiter 9876543210b avec attention. afin de répondre aux besoins.",
+    "entities": [
+      [
+        32,
+        43,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 5432109876E avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le terme 789012345GH apparaît dans ce document.",
+    "entities": [
+      [
+        9,
+        20,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "D'autre part, le cas 0987654321d nécessite un examen approfondi. dans le cadre de notre activité.",
+    "entities": [
+      [
+        21,
+        32,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 456789012EF nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "De plus, il faut considérer 987654321cd dans notre évaluation. pour améliorer nos services.",
+    "entities": [
+      [
+        28,
+        39,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 1234567890C dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 0123456789A avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 012345678IJ nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 9876543210B nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, le cas 9876543210b nécessite un examen approfondi. selon nos procédures internes.",
+    "entities": [
+      [
+        17,
+        28,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 123456789AB dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Il faut considérer 456789012EF dans notre évaluation.",
+    "entities": [
+      [
+        19,
+        30,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, nous devons traiter 0123456789a avec attention. conformément à la réglementation.",
+    "entities": [
+      [
+        31,
+        42,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 123456789AB avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 789012345GH avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "En outre, nous devons traiter 0987654321d avec attention. afin de répondre aux besoins.",
+    "entities": [
+      [
+        30,
+        41,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Nous devons traiter 456789012EF avec attention.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Cependant, le terme 789012345gh apparaît dans ce document. dans le cadre de notre activité.",
+    "entities": [
+      [
+        20,
+        31,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "Le cas 987654321CD nécessite un examen approfondi.",
+    "entities": [
+      [
+        7,
+        18,
+        "INE"
+      ]
+    ]
+  },
+  {
+    "text": "L'élément 1234567890C est important pour cette analyse.",
+    "entities": [
+      [
+        10,
+        21,
+        "INE"
+      ]
+    ]
+  }
+]
