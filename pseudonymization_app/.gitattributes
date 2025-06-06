@@ -1,1 +1,2 @@
 C:/Users/jde-thesut/Documents/Claude_V2/pseudonymization_app/data filter=lfs diff=lfs merge=lfs -text
+pseudonymization_app/data/modele_lg_multi/vocab/vectors filter=lfs diff=lfs merge=lfs -text
